@@ -9,7 +9,11 @@
     border: 1px solid green;
   }
 
-  .forums-listing {
+  .forums-panel {
     border: 1px solid blue;
+
+    .forum-container {
+      border: 1px solid aqua;
+    }
   }
 }

@@ -1,0 +1,9 @@
+<div class="forums-listing-container" *ngFor="let forum of forums">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title clickable accent-colour-1">{{forum.title}}</h4>
+      <p class="card-text">{{forum.body}}</p>
+      <p class="sub-text">Created at {{forum.timeCreated | date:'medium'}}</p>
+    </div>
+  </div>
+</div>
