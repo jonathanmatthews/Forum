@@ -1,3 +1,9 @@
 <div class="side-panel-container">
-  <p>side-panel works!</p>
+  <h6 class="side-panel-header">Categories</h6>
+
+  <div class="category-list">
+    <ul class="list-group list-group-flush" *ngFor="let category of categories">
+      <li class="list-group-item clickable">{{category}}</li>
+    </ul>
+  </div>
 </div>
