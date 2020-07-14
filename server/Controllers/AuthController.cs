@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Server.Controllers
 {
@@ -48,10 +49,16 @@ namespace Server.Controllers
                 Username = username
             };
 
-            await _userManager.CreateAsync(user, password);
+            var identityResult = await _userManager.CreateAsync(user, password);
 
-            return Ok(user);
-
+            if (identityResult.Errors.Any())
+            {
+                return BadRequest(identityResult.Errors.Select(e => e.Description));
+            }
+            else
+            {
+                return Ok();
+            }
         }
 
         [HttpPost]
@@ -65,7 +72,7 @@ namespace Server.Controllers
 
             if (user == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             if (await _userManager.CheckPasswordAsync(user, password))
@@ -79,7 +86,7 @@ namespace Server.Controllers
             }
             else
             {
-                return Ok(false);
+                return Unauthorized();
             }
         }
     }
