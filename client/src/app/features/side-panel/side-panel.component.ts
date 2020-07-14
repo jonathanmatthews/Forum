@@ -18,7 +18,14 @@ export class SidePanelComponent implements OnInit {
     'Category 5',
   ];
 
+  public activeCategory = this.categories[0];
+
   ngOnInit(): void {
+  }
+
+  public getCategory(category: string): void {
+    this.activeCategory = category;
+    // TODO: update category listing
   }
 
 }

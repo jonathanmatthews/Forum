@@ -7,7 +7,7 @@
 .clickable {
   &:hover {
     cursor: pointer;
-    filter: brightness(0.8);
+    filter: $darken-filter;
   }
 }
 

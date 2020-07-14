@@ -15,13 +15,17 @@
   }
 
   .category-list {
-    border-top: $border-line;
-
     .list-group {
-      border-bottom: $border-line;
+      border-radius: 0;
 
       .list-group-item {
+        border: none;
         padding-left: 2rem;
+      }
+
+      .clicked {
+        filter: $darken-filter;
+        font-weight: 700;
       }
     }
   }

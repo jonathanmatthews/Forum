@@ -2,8 +2,10 @@
   <h6 class="side-panel-header">Categories</h6>
 
   <div class="category-list">
-    <ul class="list-group list-group-flush" *ngFor="let category of categories">
-      <li class="list-group-item clickable">{{category}}</li>
+    <ul class="list-group" *ngFor="let category of categories">
+      <li class="list-group-item clickable"
+        [ngClass]="{'clicked': category === activeCategory}"
+        (click)="getCategory(category)">{{category}}</li>
     </ul>
   </div>
 </div>
