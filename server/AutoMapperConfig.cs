@@ -9,6 +9,8 @@ namespace Server
         public DefaultProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<Forum, ForumDto>();
+            CreateMap<User, UserDto>();
         }
     }
 }

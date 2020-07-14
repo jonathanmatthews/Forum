@@ -12,6 +12,6 @@ namespace Server.Models
         [StringLength(4000)]
         public string Text { get; set; }
         public DateTimeOffset CreationDate { get; set; }
-        public virtual IEnumerable<ChildComment> ChildComments { get; set; }
+        public virtual ICollection<ChildComment> ChildComments { get; set; }
     }
 }

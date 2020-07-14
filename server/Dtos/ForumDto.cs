@@ -1,19 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Server.Models
+namespace Server.Dtos
 {
-    public class Forum
+    public class ForumDto
     {
         public int Id { get; set; }
-        public virtual User Author { get; set; }
-        public virtual Category Category { get; set; }
+        public UserDto Author { get; set; }
+        public CategoryDto Category { get; set; }
+        [Required]
         [StringLength(100)]
         public string Title { get; set; }
         [StringLength(4000)]
         public string Text { get; set; }
         public DateTimeOffset CreationDate { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
