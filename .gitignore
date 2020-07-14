@@ -48,3 +48,4 @@ Thumbs.db
 # Server
 server/bin
 server/obj
+server/.vs
