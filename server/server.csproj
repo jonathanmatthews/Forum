@@ -5,6 +5,8 @@
     <UserSecretsId>18c46c0d-9edb-413b-8f73-663f1c6639be</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="automapper" Version="10.0.0" />
+    <PackageReference Include="automapper.extensions.microsoft.dependencyinjection" Version="8.0.0" />
     <PackageReference Include="microsoft.entityframeworkcore" Version="3.1.5" />
     <PackageReference Include="microsoft.entityframeworkcore.design" Version="3.1.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
