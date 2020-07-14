@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+
+.forum-container {
+  display: flex;
+  flex-direction: column;
+
+  .forums-header {
+    margin-bottom: $component-spacing;
+  }
+
+  .forums-listing {
+    border-top: 1px solid lightgrey;
+  }
+}

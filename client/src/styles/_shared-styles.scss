@@ -1,3 +1,16 @@
+@import './variables';
+
 * {
   margin: 0;
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+  }
+}
+
+.accent-colour-1 {
+  color: $logo-green;
 }
