@@ -9,6 +9,9 @@ export class UserMenuComponent implements OnInit {
 
   constructor() { }
 
+  // TODO: Get user's name from API
+  public username = 'Username';
+
   ngOnInit(): void {
   }
 
