@@ -10,17 +10,13 @@
   grid-template-areas:
     "side-panel forums-listing";
 
-  .nav {
-    grid-area: navbar;
-  }
-
   .side-panel {
     grid-area: side-panel;
     border-right: $border-line;
   }
 
   .forums-panel {
-    margin: 2*$component-spacing;
+    margin: 2*$spacer;
     grid-area: forums-listing;
   }
 }

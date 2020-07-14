@@ -11,6 +11,8 @@ import { SearchBarComponent } from './nav-bar/search-bar/search-bar.component';
 import { UserMenuComponent } from './nav-bar/user-menu/user-menu.component';
 import { ForumsPanelComponent } from './features/forums-panel/forums-panel.component';
 import { ForumsHeaderComponent } from './features/forums-panel/forums-header/forums-header.component';
+import { ForumDetailsComponent } from './features/forum-details/forum-details.component';
+import { CommentsComponent } from './features/forum-details/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ForumsHeaderComponent } from './features/forums-panel/forums-header/for
     SearchBarComponent,
     UserMenuComponent,
     ForumsPanelComponent,
-    ForumsHeaderComponent
+    ForumsHeaderComponent,
+    ForumDetailsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

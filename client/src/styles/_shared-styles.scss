@@ -11,6 +11,24 @@
   }
 }
 
-.accent-colour-1 {
+.accent-colour {
   color: $logo-green;
+}
+
+.sub-text {
+  color: $light-grey;
+  font-size: .8rem;
+  line-height: 0;
+}
+
+.light-font-colour {
+  color: $light-grey;
+}
+
+.dark-font-colour {
+  color: $dark-grey;
+}
+
+.link {
+  color: $blue-link;
 }
