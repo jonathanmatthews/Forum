@@ -1,4 +1,6 @@
 using AutoMapper;
+using Server.Dtos;
+using Server.Models;
 
 namespace Server
 {
