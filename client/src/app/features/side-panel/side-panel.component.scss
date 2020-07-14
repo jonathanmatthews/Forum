@@ -1,0 +1,32 @@
+@import '../../../styles/variables';
+
+.side-panel-container {
+  margin-top: 2*$component-spacing;
+  position: fixed;
+  width: $side-panel-width - 0.05rem;
+  height: 100%;
+
+  .side-panel-header {
+    margin-left: $component-spacing;
+    margin-bottom: $component-spacing;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .category-list {
+    .list-group {
+      border-radius: 0;
+
+      .list-group-item {
+        border: none;
+        padding-left: 2rem;
+      }
+
+      .clicked {
+        filter: $darken-filter;
+        font-weight: 700;
+      }
+    }
+  }
+}

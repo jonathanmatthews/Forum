@@ -1,0 +1,27 @@
+@import '../../../styles/variables';
+
+.home-container {
+  padding: 0;
+  max-width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: $side-panel-width auto;
+  grid-template-rows: 4rem auto;
+  grid-template-areas:
+    "navbar navbar"
+    "side-panel forums-listing";
+
+  .nav {
+    grid-area: navbar;
+  }
+
+  .side-panel {
+    grid-area: side-panel;
+    border-right: $border-line;
+  }
+
+  .forums-panel {
+    margin: 2*$component-spacing;
+    grid-area: forums-listing;
+  }
+}
