@@ -1,12 +1,16 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Server.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Server.Dtos;
+using System.Net.Http;
+using System.Net;
 
 namespace Server.Controllers
 {
@@ -15,35 +19,30 @@ namespace Server.Controllers
     public class AuthController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public AuthController(UserManager<User> userManager)
+        public AuthController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetAccountInfo()
+        public async Task<UserDto> GetAccountInfo()
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            return Ok(new { currentUser?.Id, currentUser?.Username });
+            return _mapper.Map<UserDto>(currentUser);
         }
 
         [HttpPost]
-        [Route("[Action]")]
-        public async Task<IActionResult> Create([FromBody] string[] usernameAndPassword)
+        [Route("Create")]
+        public async Task<ActionResult<UserDto>> Create([FromBody] string[] usernameAndPassword)
         {
             var username = usernameAndPassword[0];
             var password = usernameAndPassword[1];
 
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user != null)
-            {
-                return BadRequest();
-            }
-
-            user = new User
+            var user = new User
             {
                 Id = Guid.NewGuid().ToString(),
                 Username = username
@@ -57,13 +56,13 @@ namespace Server.Controllers
             }
             else
             {
-                return Ok();
+                return _mapper.Map<UserDto>(user);
             }
         }
 
         [HttpPost]
-        [Route("[Action]")]
-        public async Task<IActionResult> Login([FromBody] string[] usernameAndPassword)
+        [Route("Login")]
+        public async Task<ActionResult<UserDto>> Login([FromBody] string[] usernameAndPassword)
         {
             var username = usernameAndPassword[0];
             var password = usernameAndPassword[1];
@@ -82,7 +81,7 @@ namespace Server.Controllers
                 identity.AddClaim(new Claim(ClaimTypes.Name, user.Username));
                 await HttpContext.SignInAsync("cookies", new ClaimsPrincipal(identity), new AuthenticationProperties { IsPersistent = true });
 
-                return Ok(new { user.Id, user.Username });
+                return _mapper.Map<UserDto>(user);
             }
             else
             {
