@@ -4,7 +4,13 @@
       {{username}}
     </button>
     <div class="dropdown-menu dropdown-menu-right">
-      <button class="dropdown-item" type="button">Log out</button>
+      <div *ngIf="!loggedIn">
+        <input class="dropdown-item" placeholder="Username" [(ngModel)]="usernameInput"/><br />
+        <input class="dropdown-item" placeholder="Password" type="password" [(ngModel)]="passwordInput"/><br />
+        <button class="dropdown-item" type="button" (click)="login()">Log In</button><br />
+        <button class="dropdown-item" type="button" (click)="createAccount()">Create Account</button>
+      </div>
+      <button class="dropdown-item" type="button" (click)="logout()" *ngIf="loggedIn">Log out</button>
     </div>
   </div>
 </div>

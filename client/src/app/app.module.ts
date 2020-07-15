@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { ForumsPanelComponent } from './features/forums-panel/forums-panel.compo
 import { ForumsHeaderComponent } from './features/forums-panel/forums-header/forums-header.component';
 import { ForumDetailsComponent } from './features/forum-details/forum-details.component';
 import { CommentsComponent } from './features/forum-details/comments/comments.component';
+import { AuthClient } from './generated/forum-api.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,14 @@ import { CommentsComponent } from './features/forum-details/comments/comments.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    AuthClient
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
