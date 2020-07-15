@@ -10,6 +10,8 @@ namespace Server
         {
             CreateMap<Category, CategoryDto>();
             CreateMap<Forum, ForumDto>();
+            CreateMap<Comment, CommentDto>();
+            CreateMap<ChildComment, ChildCommentDto>();
             CreateMap<User, UserDto>();
         }
     }

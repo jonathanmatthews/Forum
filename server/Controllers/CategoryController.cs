@@ -38,7 +38,8 @@ namespace server.Controllers
 
         [HttpGet]
         [Route("[Action]")]
-        public async Task<CategoryDto[]> ListCategories([FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
+        public async Task<CategoryDto[]> ListCategories([FromQuery] int? itemsPerPage = null,
+            [FromQuery] int? pageNumber = null)
         {
             var query = _context.Categories
                 .OrderBy(o => o.Title)
@@ -97,7 +98,8 @@ namespace server.Controllers
 
         [HttpGet]
         [Route("{categoryId}/[Action]")]
-        public async Task<IActionResult> ListForums([FromRoute] int categoryId, [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
+        public async Task<IActionResult> ListForums([FromRoute] int categoryId,
+            [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
         {
             var category = _context.Categories
                 .Where(o => o.Id == categoryId);
@@ -120,14 +122,15 @@ namespace server.Controllers
             }
 
             return Ok(await query
-            .ProjectTo<ForumDto>(_mapper.ConfigurationProvider)
-            .ToArrayAsync());
+                .ProjectTo<ForumDto>(_mapper.ConfigurationProvider)
+                .ToArrayAsync());
         }
 
         [HttpPost]
         [Authorize]
         [Route("{categoryId}/[Action]")]
-        public async Task<IActionResult> CreateForum([FromRoute] int categoryId, [FromBody] ForumDto newForum)
+        public async Task<IActionResult> CreateForum([FromRoute] int categoryId,
+            [FromBody] ForumDto newForum)
         {
             if (!ModelState.IsValid)
             {
