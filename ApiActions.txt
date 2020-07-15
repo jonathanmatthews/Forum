@@ -1,0 +1,21 @@
+/Auth
+	/Create (post)
+	/Login (post)
+	/GetAccountInfo (get)
+
+/Category
+	/CountCategories(get)
+	/ListCategories (get)
+	/CreateCategory (post)
+	/{CategoryId}/CountForums (get)
+	/{CategoryId}/ListForums (get)
+	/{CategoryId}/CreateForum (post)
+
+/Forum
+	/{ForumId}/ (get)
+	/{ForumId}/CommentCount {get}
+	/{ForumId}/Comments (get)
+	/{ForumId}/CreateComment (post)
+	/{ForumId}/{CommentId}/ChildCommentCount (get)
+	/{ForumId}/{CommentId}/ChildComments (get)
+	/{ForumId}/{CommentId}/CreateChildComment (post)
