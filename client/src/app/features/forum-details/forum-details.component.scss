@@ -2,6 +2,7 @@
 
 .forum-details-container {
   margin-top: $nav-bar-height;
+  margin-bottom: 2*$spacer;
   margin-left: $side-panel-width + 2*$spacer;
   margin-right: $side-panel-width + 2*$spacer;
   //border: 1px solid red;
@@ -32,9 +33,5 @@
 
   .comments {
     //border: 1px solid blueviolet;
-  }
-
-  .comment-form {
-    //border: 1px solid brown;
   }
 }

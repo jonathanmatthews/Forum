@@ -4,12 +4,15 @@ $light-grey: #969696;
 $logo-green: #7FC73F;
 $dark-grey: #212529;
 $blue-link: #007bff;
+$border-light-grey: #dee2e6;
 $darken-filter: brightness(0.8);
 
 // Spacing
 $spacer: 1rem;
 $side-panel-width: 17rem;
 $nav-bar-height: 4rem;
+$sm-font-size: .8rem;
 
 // Others
 $border-line: 1px solid lightgrey;
+$light-border-line: 1px solid $border-light-grey;

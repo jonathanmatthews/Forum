@@ -1,9 +1,54 @@
 @import '../../../../styles/variables';
 
-.card-body {
-  line-height: .8rem;
+.tab-content {
+  border: $light-border-line;
+  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+  border-top: none;
+  padding: $spacer;
 
-  .card-link {
-    font-size: .8rem;
+  .tab-pane {
+    font-size: .9rem;
+  }
+
+  .card {
+    border: none;
+
+    .card-header {
+      border: none;
+    }
+
+    .card-body, .card-header {
+      background-color: white;
+
+      .card-link {
+        color: $blue-link;
+      }
+    }
+
+    .card-title, .card-text, .card-link {
+      line-height: $sm-font-size;
+    }
+
+    .card-text {
+      margin-bottom: .5rem;
+    }
+
+    .card-body {
+      padding-top: .5rem;
+      margin-left: $spacer;
+
+      .sm-font {
+        font-size: $sm-font-size;
+      }
+    }
+  }
+
+  .add-comment {
+    padding: $spacer;
+
+    .sm-font {
+      font-size: $sm-font-size;
+    }
   }
 }

@@ -18,6 +18,7 @@ export class ForumDetailsComponent implements OnInit {
 
   constructor() { }
 
+  // TODO: Use endpoints
   public forum: Forum = {
     id: 1,
     author: 'user',
