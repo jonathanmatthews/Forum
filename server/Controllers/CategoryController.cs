@@ -30,15 +30,15 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        [Route("[Action]")]
-        public async Task<int> CountCategories()
+        [Route("CountCategories")]
+        public async Task<ActionResult<int>> CountCategories()
         {
             return await _context.Categories.CountAsync();
         }
 
         [HttpGet]
-        [Route("[Action]")]
-        public async Task<CategoryDto[]> ListCategories([FromQuery] int? itemsPerPage = null,
+        [Route("ListCategories")]
+        public async Task<ActionResult<CategoryDto[]>> ListCategories([FromQuery] int? itemsPerPage = null,
             [FromQuery] int? pageNumber = null)
         {
             var query = _context.Categories
@@ -59,8 +59,8 @@ namespace server.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("[Action]")]
-        public async Task<IActionResult> CreateCategory([FromBody] CategoryDto newCategory)
+        [Route("CreateCategory")]
+        public async Task<ActionResult<CategoryDto>> CreateCategory([FromBody] CategoryDto newCategory)
         {
             if (!ModelState.IsValid)
             {
@@ -76,12 +76,12 @@ namespace server.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return Ok(_mapper.Map<CategoryDto>(category));
+            return _mapper.Map<CategoryDto>(category);
         }
 
         [HttpGet]
-        [Route("{categoryId}/[Action]")]
-        public async Task<IActionResult> CountForums([FromRoute] int categoryId)
+        [Route("{categoryId}/CountForums")]
+        public async Task<ActionResult<int>> CountForums([FromRoute] int categoryId)
         {
             var category = _context.Categories
                 .Where(o => o.Id == categoryId);
@@ -91,14 +91,14 @@ namespace server.Controllers
                 return BadRequest("Category not found.");
             }
 
-            return Ok(await category
+            return await category
                 .SelectMany(o => o.Forums)
-                .CountAsync());
+                .CountAsync();
         }
 
         [HttpGet]
-        [Route("{categoryId}/[Action]")]
-        public async Task<IActionResult> ListForums([FromRoute] int categoryId,
+        [Route("{categoryId}/ListForums")]
+        public async Task<ActionResult<ForumDto[]>> ListForums([FromRoute] int categoryId,
             [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
         {
             var category = _context.Categories
@@ -121,15 +121,15 @@ namespace server.Controllers
                     .Take((int)itemsPerPage);
             }
 
-            return Ok(await query
+            return await query
                 .ProjectTo<ForumDto>(_mapper.ConfigurationProvider)
-                .ToArrayAsync());
+                .ToArrayAsync();
         }
 
         [HttpPost]
         [Authorize]
-        [Route("{categoryId}/[Action]")]
-        public async Task<IActionResult> CreateForum([FromRoute] int categoryId,
+        [Route("{categoryId}/CreateForum")]
+        public async Task<ActionResult<ForumDto>> CreateForum([FromRoute] int categoryId,
             [FromBody] ForumDto newForum)
         {
             if (!ModelState.IsValid)
@@ -158,7 +158,7 @@ namespace server.Controllers
             category.Forums.Add(forum);
             await _context.SaveChangesAsync();
 
-            return Ok(_mapper.Map<ForumDto>(forum));
+            return _mapper.Map<ForumDto>(forum);
         }
     }
 }
