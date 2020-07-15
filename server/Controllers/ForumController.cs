@@ -31,7 +31,7 @@ namespace Server.Controllers
 
         [HttpGet]
         [Route("{forumId}")]
-        public async Task<IActionResult> GetForum(int forumId)
+        public async Task<ActionResult<ForumDto>> GetForum(int forumId)
         {
             var forum = await _context.Forums
                 .Where(o => o.Id == forumId)
@@ -42,12 +42,12 @@ namespace Server.Controllers
                 return BadRequest("Forum not found.");
             }
 
-            return Ok(_mapper.Map<ForumDto>(forum));
+            return _mapper.Map<ForumDto>(forum);
         }
 
         [HttpGet]
-        [Route("{forumId}/[Action]")]
-        public async Task<IActionResult> ListComments([FromRoute] int forumId,
+        [Route("{forumId}/ListComments")]
+        public async Task<ActionResult<CommentDto[]>> ListComments([FromRoute] int forumId,
             [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
         {
             var forum = _context.Forums
@@ -70,15 +70,15 @@ namespace Server.Controllers
                     .Take((int)itemsPerPage);
             }
 
-            return Ok(await query
+            return await query
                 .ProjectTo<CommentDto>(_mapper.ConfigurationProvider)
-                .ToArrayAsync());
+                .ToArrayAsync();
         }
 
         [HttpPost]
         [Authorize]
-        [Route("{forumId}/[Action]")]
-        public async Task<IActionResult> CreateComment([FromRoute] int forumId,
+        [Route("{forumId}/CreateComment")]
+        public async Task<ActionResult<CommentDto>> CreateComment([FromRoute] int forumId,
             [FromBody] CommentDto newComment)
         {
             if (!ModelState.IsValid)
@@ -106,12 +106,12 @@ namespace Server.Controllers
             forum.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            return Ok(_mapper.Map<CommentDto>(comment));
+            return _mapper.Map<CommentDto>(comment);
         }
 
         [HttpGet]
-        [Route("Comment/{commentId}/[Action]")]
-        public async Task<IActionResult> ListChildComments([FromRoute] int commentId,
+        [Route("Comment/{commentId}/ListChildComments")]
+        public async Task<ActionResult<ChildCommentDto[]>> ListChildComments([FromRoute] int commentId,
             [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
         {
             var parentComment = _context.Comments
@@ -134,15 +134,15 @@ namespace Server.Controllers
                     .Take((int)itemsPerPage);
             }
 
-            return Ok(await query
+            return await query
                 .ProjectTo<ChildCommentDto>(_mapper.ConfigurationProvider)
-                .ToArrayAsync());
+                .ToArrayAsync();
         }
 
         [HttpPost]
         [Authorize]
-        [Route("Comment/{CommentId}/[Action]")]
-        public async Task<IActionResult> CreateChildComment([FromRoute] int commentId,
+        [Route("Comment/{CommentId}/CreateChildComment")]
+        public async Task<ActionResult<ChildCommentDto>> CreateChildComment([FromRoute] int commentId,
             [FromBody] ChildCommentDto newChildComment)
         {
             if (!ModelState.IsValid)
@@ -170,7 +170,7 @@ namespace Server.Controllers
             parentComment.ChildComments.Add(comment);
             await _context.SaveChangesAsync();
 
-            return Ok(_mapper.Map<ChildCommentDto>(comment));
+            return _mapper.Map<ChildCommentDto>(comment);
         }
     }
 }
