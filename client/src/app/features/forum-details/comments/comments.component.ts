@@ -32,6 +32,11 @@ export class CommentsComponent implements OnInit {
           author: 'user2',
           text: 'Some child comment 1',
           creationDate: new Date(),
+        },
+        {
+          author: 'user5',
+          text: 'Some child comment 3',
+          creationDate: new Date(),
         }
       ]
     } as Comment,
@@ -47,6 +52,12 @@ export class CommentsComponent implements OnInit {
         }
       ]
     } as Comment,
+    {
+      author: 'user7',
+      text: 'Some comment 7',
+      creationDate: new Date(),
+      childComments: []
+    } as Comment
   ];
 
   private readonly _forumId: number;

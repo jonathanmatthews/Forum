@@ -36,7 +36,9 @@
 
     .card-body {
       padding-top: .5rem;
-      margin-left: $spacer;
+      padding-bottom: .5rem;
+      margin-left: $spacer + .5rem;
+      border-left: 1.5px solid $border-light-grey;
 
       .sm-font {
         font-size: $sm-font-size;
