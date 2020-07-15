@@ -13,6 +13,7 @@ import { ForumsPanelComponent } from './features/forums-panel/forums-panel.compo
 import { ForumsHeaderComponent } from './features/forums-panel/forums-header/forums-header.component';
 import { ForumDetailsComponent } from './features/forum-details/forum-details.component';
 import { CommentsComponent } from './features/forum-details/comments/comments.component';
+import { CreateForumComponent } from './features/create-forum/create-forum.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CommentsComponent } from './features/forum-details/comments/comments.co
     ForumsPanelComponent,
     ForumsHeaderComponent,
     ForumDetailsComponent,
-    CommentsComponent
+    CommentsComponent,
+    CreateForumComponent
   ],
   imports: [
     BrowserModule,

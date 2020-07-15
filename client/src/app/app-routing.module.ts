@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { ForumDetailsComponent } from './features/forum-details/forum-details.component';
+import { CreateForumComponent } from './features/create-forum/create-forum.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'forums/:id',
     component: ForumDetailsComponent
+  },
+  {
+    path: 'forums/create',
+    component: CreateForumComponent
   }
 ];
 

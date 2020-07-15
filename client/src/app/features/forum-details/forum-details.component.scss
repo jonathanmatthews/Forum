@@ -5,12 +5,10 @@
   margin-bottom: 2*$spacer;
   margin-left: $side-panel-width + 2*$spacer;
   margin-right: $side-panel-width + 2*$spacer;
-  //border: 1px solid red;
 
   .forum-header {
     padding-top: 2*$spacer;
     border-bottom: $border-line;
-    //border: 1px solid blue;
 
     h1 {
       padding-bottom: $spacer;
@@ -23,15 +21,9 @@
 
   .forum-text {
     margin-bottom: 3*$spacer;
-    //border: 1px solid pink;
   }
 
   .forum-details {
     text-align: right;
-    //border: 1px solid hotpink;
-  }
-
-  .comments {
-    //border: 1px solid blueviolet;
   }
 }
