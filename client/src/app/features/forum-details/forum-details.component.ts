@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // TODO: replace model with generated nswag version
 export interface Forum {
@@ -16,7 +17,9 @@ export interface Forum {
 })
 export class ForumDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
   // TODO: Use endpoints
   public forum: Forum = {
@@ -31,6 +34,10 @@ export class ForumDetailsComponent implements OnInit {
   };
 
   public ngOnInit(): void {
+  }
+
+  public goToCreateForum(): void {
+    this._router.navigate(['forum/create']);
   }
 
 }

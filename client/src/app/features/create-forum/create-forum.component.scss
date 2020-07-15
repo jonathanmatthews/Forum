@@ -1,33 +1,27 @@
 @import '../../../styles/variables';
 
-.forum-details-container {
+.create-forum-container {
   margin-top: $nav-bar-height;
   margin-bottom: 2*$spacer;
   margin-left: $side-panel-width + 2*$spacer;
   margin-right: $side-panel-width + 2*$spacer;
 
-  .forum-header {
+  .header {
     padding-top: 2*$spacer;
     border-bottom: $border-line;
 
     .title {
       padding-bottom: $spacer;
-
-      .btn {
-        float: right;
-      }
     }
   }
 
-  .forum-text, .forum-details {
+  .forum-form {
     margin: 2*$spacer;
-  }
+    line-height: 2*$spacer;
 
-  .forum-text {
-    margin-bottom: 3*$spacer;
-  }
-
-  .forum-details {
-    text-align: right;
+    .btn {
+      padding-top: $spacer;
+      padding-bottom: $spacer;
+    }
   }
 }
