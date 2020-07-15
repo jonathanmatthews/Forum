@@ -10,8 +10,12 @@
     padding-top: 2*$spacer;
     border-bottom: $border-line;
 
-    h1 {
+    .title {
       padding-bottom: $spacer;
+
+      .btn {
+        float: right;
+      }
     }
   }
 

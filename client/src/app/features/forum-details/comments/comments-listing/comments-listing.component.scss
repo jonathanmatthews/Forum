@@ -1,0 +1,43 @@
+@import '../../../../../styles/variables';
+
+.card {
+  border: none;
+  padding-top: $spacer;
+  margin-right: 2*$spacer;
+
+  .card-header {
+    border: none;
+  }
+
+  .card-body, .card-header {
+    background-color: white;
+
+    .card-link {
+      color: $blue-link;
+    }
+  }
+
+  .card-title, .card-text, .card-link {
+    line-height: .5rem;
+  }
+
+  .card-text {
+    margin-bottom: .5rem;
+  }
+
+  .card-body {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-left: $spacer + .5rem;
+    border-left: 1.5px solid $border-light-grey;
+
+    .sm-font {
+      font-size: $sm-font-size;
+    }
+
+    .btn {
+      padding-left: $spacer;
+      padding-right: $spacer;
+    }
+  }
+}

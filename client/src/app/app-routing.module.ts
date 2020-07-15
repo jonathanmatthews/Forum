@@ -20,7 +20,7 @@ const routes: Routes = [
     component: ForumDetailsComponent
   },
   {
-    path: 'forums/create',
+    path: 'forum/create',
     component: CreateForumComponent
   }
 ];
