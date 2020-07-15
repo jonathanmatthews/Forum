@@ -1,6 +1,11 @@
 <div class="forum-details-container">
   <div class="forum-header">
-    <h1>{{forum.title}}</h1>
+    <h4 class="title">{{forum.title}}
+      <button type="button" class="btn btn-dark"
+      (click)="goToCreateForum()">
+      Add new forum +
+    </button>
+    </h4>
   </div>
 
   <section class="forum-text">
