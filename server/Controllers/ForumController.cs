@@ -46,6 +46,34 @@ namespace Server.Controllers
         }
 
         [HttpGet]
+        [Route("Search")]
+        public async Task<ActionResult<ForumDto[]>> Search([FromQuery] string term,
+            [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                return BadRequest("Search term must not be empty.");
+            }
+
+            var query = _context.Forums
+                .Where(o => o.Title.Contains(term) || o.Text.Contains(term))
+                .OrderByDescending(o => o.CreationDate)
+                .AsQueryable();
+            
+            if (itemsPerPage != null && pageNumber != null)
+            {
+                query = query
+                    .Skip((int)pageNumber * (int)itemsPerPage)
+                    .Take((int)itemsPerPage);
+            }
+
+            return await query
+                .ProjectTo<ForumDto>(_mapper.ConfigurationProvider)
+                .ToArrayAsync();
+
+        }
+
+        [HttpGet]
         [Route("{forumId}/ListComments")]
         public async Task<ActionResult<CommentDto[]>> ListComments([FromRoute] int forumId,
             [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
