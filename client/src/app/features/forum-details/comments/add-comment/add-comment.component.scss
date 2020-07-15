@@ -1,0 +1,10 @@
+@import '../../../../../styles/variables';
+
+  .add-comment {
+    padding: $spacer;
+    padding-top: 2*$spacer;
+
+    .sm-font {
+      font-size: $sm-font-size;
+    }
+  }

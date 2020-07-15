@@ -1,0 +1,8 @@
+<div class="add-comment">
+  <p class="sub-text">@user</p>
+  <textarea type="text" class="form-control sm-font" placeholder="Add your comment..." rows="10"
+    [formControl]="comment"></textarea>
+  <button type="button" class="w-100-btn btn btn-dark" (click)="createComment()">
+    Post comment
+  </button>
+</div>

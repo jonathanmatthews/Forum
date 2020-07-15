@@ -1,8 +1,9 @@
 @import '../../../styles/variables';
 
 .side-panel-container {
-  margin-top: 2*$spacer;
+  padding-top: 2*$spacer;
   position: fixed;
+  border-right: $border-line;
   width: $side-panel-width - 0.05rem;
   height: 100%;
 
