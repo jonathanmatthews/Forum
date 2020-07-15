@@ -13,6 +13,7 @@
 
 /Forum
 	/{ForumId}/ (get)
+	/Search (get)
 	/{ForumId}/ListComments (get)
 	/{ForumId}/CreateComment (post)
 	/Comment/{CommentId}/ListChildComments (get)

@@ -555,6 +555,61 @@ export class ForumClient {
         return _observableOf<ForumDto | null>(<any>null);
     }
 
+    search(term: string | null, itemsPerPage: number | null | undefined, pageNumber: number | null | undefined): Observable<ForumDto[] | null> {
+        let url_ = this.baseUrl + "/Forum/Search?";
+        if (term === undefined)
+            throw new Error("The parameter 'term' must be defined.");
+        else if(term !== null)
+            url_ += "term=" + encodeURIComponent("" + term) + "&";
+        if (itemsPerPage !== undefined && itemsPerPage !== null)
+            url_ += "itemsPerPage=" + encodeURIComponent("" + itemsPerPage) + "&";
+        if (pageNumber !== undefined && pageNumber !== null)
+            url_ += "pageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSearch(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSearch(<any>response_);
+                } catch (e) {
+                    return <Observable<ForumDto[] | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ForumDto[] | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processSearch(response: HttpResponseBase): Observable<ForumDto[] | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : <ForumDto[]>JSON.parse(_responseText, this.jsonParseReviver);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ForumDto[] | null>(<any>null);
+    }
+
     listComments(forumId: number, itemsPerPage: number | null | undefined, pageNumber: number | null | undefined): Observable<CommentDto[] | null> {
         let url_ = this.baseUrl + "/Forum/{forumId}/ListComments?";
         if (forumId === undefined || forumId === null)
