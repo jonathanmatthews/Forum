@@ -13,9 +13,7 @@
 
 /Forum
 	/{ForumId}/ (get)
-	/{ForumId}/CommentCount {get}
-	/{ForumId}/Comments (get)
+	/{ForumId}/ListComments (get)
 	/{ForumId}/CreateComment (post)
-	/{ForumId}/{CommentId}/ChildCommentCount (get)
-	/{ForumId}/{CommentId}/ChildComments (get)
-	/{ForumId}/{CommentId}/CreateChildComment (post)
+	/Comment/{CommentId}/ListChildComments (get)
+	/Comment/{CommentId}/CreateChildComment (post)
