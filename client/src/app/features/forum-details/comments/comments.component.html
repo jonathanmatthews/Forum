@@ -1,0 +1,52 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active normal-font-colour" data-toggle="tab" href="#accordion">Comments
+      <span class="badge badge-pill accent-colour">{{comments.length}}</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link normal-font-colour" data-toggle="tab" href="#add-comment">Add comment</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <!-- Comments panel -->
+  <div class="tab-pane container active" id="accordion">
+    <div class="card" *ngFor="let comment of comments; let i = index">
+      <div class="card-header" id="heading">
+          <p class="card-title sub-text">@{{comment.author}} • {{comment.creationDate | date:'medium'}}</p>
+          <p class="card-text">{{comment.text}}</p>
+          <a data-toggle="collapse" attr.data-target="#reply-{{i}}" aria-expanded="true" aria-controls="reply"
+          class="card-link clickable sm-font">Reply</a>
+          <a *ngIf="comment.childComments.length > 0"
+          data-toggle="collapse" attr.data-target="#child-comments-{{i}}" aria-expanded="true" aria-controls="child-comments"
+          class="card-link clickable sm-font">Show replies {{comment.childComments.length}}</a>
+      </div>
+
+      <!-- Reply to parent comment panel -->
+      <div attr.id="reply-{{i}}" class="collapse" aria-labelledby="heading" data-parent="#accordion">
+        <div class="card-body">
+          <input type="text" class="sm-font form-control" placeholder="Reply to comment...">
+        </div>
+      </div>
+
+      <!-- Child comments panel -->
+      <div attr.id="child-comments-{{i}}" class="collapse" aria-labelledby="heading" data-parent="#accordion">
+        <div class="child-comment card-body" *ngFor="let childComment of comment.childComments">
+          <p class="card-title sub-text">@{{childComment.author}} • {{childComment.creationDate | date:'medium'}}</p>
+          <p class="card-text">{{childComment.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add new comment panel -->
+  <div class="tab-pane container fade" id="add-comment">
+    <div class="add-comment">
+      <p class="sub-text">@user</p>
+      <input type="text" class="form-control sm-font" placeholder="Add your comment...">
+    </div>
+  </div>
+</div>

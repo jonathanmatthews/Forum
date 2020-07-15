@@ -1,9 +1,15 @@
+@import '../../styles/variables';
+
 nav {
   width: 100vw;
-  height: 4rem;
+  height: $nav-bar-height;
 
   .search-bar {
     margin: auto;
     width: 35%;
+  }
+
+  .user-menu {
+    margin-right: $spacer;
   }
 }

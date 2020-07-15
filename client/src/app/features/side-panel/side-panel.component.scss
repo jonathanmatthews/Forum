@@ -1,14 +1,14 @@
 @import '../../../styles/variables';
 
 .side-panel-container {
-  margin-top: 2*$component-spacing;
+  margin-top: 2*$spacer;
   position: fixed;
   width: $side-panel-width - 0.05rem;
   height: 100%;
 
   .side-panel-header {
-    margin-left: $component-spacing;
-    margin-bottom: $component-spacing;
+    margin-left: $spacer;
+    margin-bottom: $spacer;
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;

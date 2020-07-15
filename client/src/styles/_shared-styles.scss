@@ -6,11 +6,33 @@
 
 .clickable {
   &:hover {
-    cursor: pointer;
-    filter: $darken-filter;
+    cursor: pointer !important;
+    filter: $darken-filter !important;
   }
 }
 
-.accent-colour-1 {
+.accent-colour {
   color: $logo-green;
+}
+
+.sub-text {
+  color: $light-grey;
+  font-size: $sm-font-size;
+  line-height: 0;
+}
+
+.sm-font {
+  font-size: $sm-font-size;
+}
+
+.light-font-colour {
+  color: $light-grey;
+}
+
+.normal-font-colour {
+  color: $dark-grey !important;
+}
+
+.link {
+  color: $blue-link;
 }
