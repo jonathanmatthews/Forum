@@ -10,17 +10,25 @@
     <div class="form-group" *ngIf="categories$ | async as categories">
       <label for="category">Category</label>
       <select class="form-control" id="category" formControlName="category">
-        <option *ngFor="let category of categories"
-          value="{{category.id}}">{{category.title}}</option>
+        <option *ngFor="let category of categories" value="{{category.id}}">{{category.title}}</option>
       </select>
+      <div class="user-menu-container">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            New Category
+          </button>
+          <section class="dropdown-menu dropdown-menu-right">
+            <button>beep</button>
+          </section>
+        </div>
+      </div>
     </div>
     <div class="form-group">
-      <textarea class="form-control" id="forum-text" rows="10"
-        placeholder="What would you like to discuss?" formControlName="text"></textarea>
+      <textarea class="form-control" id="forum-text" rows="10" placeholder="What would you like to discuss?"
+        formControlName="text"></textarea>
     </div>
 
-    <button type="button" class="w-100-btn btn btn-dark" (click)="createForum()"
-      [disabled]="!formGroup.valid">
+    <button type="button" class="w-100-btn btn btn-dark" (click)="createForum()" [disabled]="!formGroup.valid">
       Post forum
     </button>
   </form>
