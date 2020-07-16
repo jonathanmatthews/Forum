@@ -5,5 +5,5 @@
   <button type="button" class="w-100-btn btn btn-dark" (click)="createComment()" [disabled]="comment.invalid">
     Post comment
   </button>
-  <p class="danger-font-colour" *ngIf="unauthorised">You must be logged in to post a comment.</p>
+  <p class="danger-font-colour message" *ngIf="unauthorised">You must be logged in to post a comment.</p>
 </div>
