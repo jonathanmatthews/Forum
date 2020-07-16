@@ -7,7 +7,9 @@ import { CategoryDto } from '../generated/forum-api.service';
 })
 export class FiltersService {
 
-  constructor() { }
+  constructor() {
+    this.initialiseObservables();
+   }
 
   public selectedCategory$: Observable<CategoryDto>;
   public searchTerm$: Observable<string>;
@@ -15,15 +17,15 @@ export class FiltersService {
   private _categorySubject = new Subject<CategoryDto>();
   private _searchTermSubject = new BehaviorSubject<string>('');
 
-  public UpdateCategory(category: CategoryDto): void {
+  public updateCategory(category: CategoryDto): void {
     this._categorySubject.next(category);
   }
 
-  public UpdateSearchTerm(term: string): void {
+  public updateSearchTerm(term: string): void {
     this._searchTermSubject.next(term);
   }
 
-  private InitialiseObservables(): void {
+  private initialiseObservables(): void {
     this.selectedCategory$ = this._categorySubject.asObservable();
     this.searchTerm$ = this._searchTermSubject.asObservable();
   }

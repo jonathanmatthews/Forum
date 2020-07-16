@@ -1,11 +1,15 @@
 <div class="side-panel-container">
   <h6 class="side-panel-header">Categories</h6>
 
-  <div class="category-list">
-    <ul class="list-group" *ngFor="let category of categories">
+  <div class="category-list" *ngIf="categories$ | async as categories">
+    <ul class="list-group">
+      <li class="list-group-item clickable">
+
+      </li>
       <li class="list-group-item clickable"
+        *ngFor="let category of categories"
         [ngClass]="{'clicked': category === activeCategory}"
-        (click)="getCategory(category)">{{category}}</li>
+        (click)="getCategory(category)">{{category.title}}</li>
     </ul>
   </div>
 </div>
