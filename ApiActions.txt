@@ -1,6 +1,7 @@
 /Auth
 	/Create (post)
 	/Login (post)
+	/Logout (post)
 	/GetAccountInfo (get)
 
 /Category
