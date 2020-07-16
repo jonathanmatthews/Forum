@@ -59,7 +59,7 @@ namespace Server.Controllers
                 .Where(o => o.Title.Contains(term) || o.Text.Contains(term))
                 .OrderByDescending(o => o.CreationDate)
                 .AsQueryable();
-            
+
             if (itemsPerPage != null && pageNumber != null)
             {
                 query = query
@@ -71,6 +71,27 @@ namespace Server.Controllers
                 .ProjectTo<ForumDto>(_mapper.ConfigurationProvider)
                 .ToArrayAsync();
 
+        }
+
+        [HttpGet]
+        [Route("All")]
+        public async Task<ActionResult<ForumDto[]>> All([FromQuery] int? itemsPerPage = null,
+            [FromQuery] int? pageNumber = null)
+        {
+            var query = _context.Forums
+                            .OrderByDescending(o => o.CreationDate)
+                            .AsQueryable();
+
+            if (itemsPerPage != null && pageNumber != null)
+            {
+                query = query
+                    .Skip((int)pageNumber * (int)itemsPerPage)
+                    .Take((int)itemsPerPage);
+            }
+
+            return await query
+                .ProjectTo<ForumDto>(_mapper.ConfigurationProvider)
+                .ToArrayAsync();
         }
 
         [HttpGet]
