@@ -2,7 +2,8 @@
   <p class="sub-text">@user</p>
   <textarea type="text" class="form-control sm-font" placeholder="Add your comment..." rows="10"
     [formControl]="comment"></textarea>
-  <button type="button" class="w-100-btn btn btn-dark" (click)="createComment()">
+  <button type="button" class="w-100-btn btn btn-dark" (click)="createComment()" [disabled]="comment.invalid">
     Post comment
   </button>
+  <p class="danger-font-colour" *ngIf="unauthorised">You must be logged in to post a comment.</p>
 </div>
