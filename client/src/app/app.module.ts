@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { ForumsPanelComponent } from './features/forums-panel/forums-panel.compo
 import { ForumsHeaderComponent } from './features/forums-panel/forums-header/forums-header.component';
 import { ForumDetailsComponent } from './features/forum-details/forum-details.component';
 import { CommentsComponent } from './features/forum-details/comments/comments.component';
+import { AuthClient } from './generated/forum-api.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CreateForumComponent } from './features/create-forum/create-forum.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCommentComponent } from './features/forum-details/comments/add-comment/add-comment.component';
@@ -40,6 +43,7 @@ import { AuthClient, CategoryClient, ForumClient } from './generated/forum-api.s
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
