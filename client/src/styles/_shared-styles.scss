@@ -42,8 +42,9 @@ html, body {
   color: $blue-link;
 }
 
-.danger-font-colour {
+.danger-font {
   color: $danger-red;
+  font-weight: 600;
 }
 
 .w-100-btn {

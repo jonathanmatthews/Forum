@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, of } from 'rxjs';
 import { CategoryDto } from '../generated/forum-api.service';
+import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class FiltersService {
 
   private initialiseObservables(): void {
     this.selectedCategory$ = this._categorySubject.asObservable();
-    this.searchTerm$ = this._searchTermSubject.asObservable();
+    this.searchTerm$ = this._searchTermSubject.asObservable()
+      .pipe(
+        switchMap((term) => of(term)),
+        distinctUntilChanged()
+      );
   }
 }

@@ -23,5 +23,7 @@
       [disabled]="!formGroup.valid">
       Post forum
     </button>
+
+    <p class="error-message danger-font" *ngIf="errorMessage">{{errorMessage}}</p>
   </form>
 </div>

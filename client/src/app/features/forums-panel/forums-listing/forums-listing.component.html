@@ -2,9 +2,9 @@
   <ng-container *ngIf="forums.length > 0; else emptyListing">
     <div class="card" *ngFor="let forum of forums">
       <div class="card-body">
-        <h4 class="card-title clickable accent-colour"
+        <h5 class="card-title clickable accent-colour"
           (click)="goToForum(forum)">
-          {{forum.title}}</h4>
+          {{forum.title}}</h5>
         <p class="card-text text-truncate">{{forum.text}}</p>
         <p class="sub-text">Created at {{forum.creationDate | date:'medium'}}</p>
       </div>

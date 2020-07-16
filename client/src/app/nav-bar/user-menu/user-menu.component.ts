@@ -39,12 +39,11 @@ export class UserMenuComponent implements OnInit, OnDestroy {
           }
         }),
         takeUntil(this._destroy$))
-          .subscribe(user => {
-            if (user) {
-              this.user = user;
-            }
+        .subscribe(user => {
+          if (user) {
+            this.user = user;
           }
-        );
+        });
   }
 
   public ngOnDestroy(): void {
