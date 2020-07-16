@@ -1,6 +1,6 @@
-<div class="forum-details-container">
+<div class="forum-details-container" *ngIf="forum">
   <div class="forum-header">
-    <h4 class="title">{{forum.title}}
+    <h4 class="title">{{forum.category.title}} >> {{forum.title}}
       <button type="button" class="btn btn-dark"
       (click)="goToCreateForum()">
       Add new forum +
@@ -14,7 +14,7 @@
 
   <section class="forum-details">
     <p class="sub-text">Created by
-      <span class="accent-colour">@{{forum.author}}</span> on
+      <span class="accent-colour">@{{forum.author.username}}</span> on
       <span class="accent-colour">{{forum.creationDate | date:'long'}}</span>
     </p>
   </section>

@@ -34,6 +34,8 @@ namespace Server.Controllers
         public async Task<ActionResult<ForumDto>> GetForum(int forumId)
         {
             var forum = await _context.Forums
+                .Include(o => o.Author)
+                .Include(o => o.Category)
                 .Where(o => o.Id == forumId)
                 .FirstOrDefaultAsync();
 
