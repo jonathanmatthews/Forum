@@ -88,5 +88,12 @@ namespace Server.Controllers
                 return Unauthorized();
             }
         }
+
+        [HttpPost]
+        [Route("Logout")]
+        public async Task Logout()
+        {
+            await HttpContext.SignOutAsync("cookies");
+        }
     }
 }
