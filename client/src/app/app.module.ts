@@ -20,6 +20,8 @@ import { CreateForumComponent } from './features/create-forum/create-forum.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCommentComponent } from './features/forum-details/comments/add-comment/add-comment.component';
 import { CommentsListingComponent } from './features/forum-details/comments/comments-listing/comments-listing.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AuthClient, CategoryClient, ForumClient } from './generated/forum-api.service';
 
 @NgModule({
   declarations: [
@@ -43,11 +45,14 @@ import { CommentsListingComponent } from './features/forum-details/comments/comm
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     HttpClient,
-    AuthClient
+    AuthClient,
+    CategoryClient,
+    ForumClient
   ],
   bootstrap: [AppComponent]
 })

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +44,19 @@ namespace Server
             services.AddScoped<AppDbContext>();
             services.AddScoped<IUserStore<User>, UserStore>();
             services.AddAuthentication("cookies")
-                .AddCookie("cookies", options => options.LoginPath = "/Auth/Login");
+                .AddCookie("cookies", options =>
+                {
+                    options.Cookie.Name = "auth_cookie";
+                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = redirectContext =>
+                        {
+                            redirectContext.HttpContext.Response.StatusCode = 401;
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
             services.AddControllers();
             services.AddAutoMapper(typeof(Server.DefaultProfile));
