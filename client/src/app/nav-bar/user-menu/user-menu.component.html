@@ -1,5 +1,5 @@
 <div class="user-menu-container">
-  <div *ngIf="!(user$ | async)" class="btn-group">
+  <div *ngIf="!user" class="btn-group">
     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
       {{formTitle}}
     </button>
@@ -19,11 +19,11 @@
 
         <div *ngIf="formTitle=='Log in'">
           <button class="btn btn-primary"
-          (click)="login()"
-          [disabled]="!loginForm.valid">Log in
-        </button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" (click)="toggleForm()">New around here? Sign up</button>
+            (click)="login()"
+            [disabled]="!loginForm.valid">Log in
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" (click)="toggleForm()">New around here? Sign up</button>
         </div>
 
         <div *ngIf="formTitle=='Sign up'">
@@ -38,7 +38,7 @@
     </section>
   </div>
 
-  <div *ngIf="user$ | async as user" class="btn-group">
+  <div *ngIf="user" class="btn-group">
     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
       {{user.username}}
     </button>
