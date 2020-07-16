@@ -17,12 +17,16 @@
     }
   }
 
-  .card-title, .card-text, .card-link {
+  .card-title, .card-link {
     line-height: .5rem;
   }
 
   .card-text {
-    margin-bottom: .5rem;
+    margin-bottom: 0;
+  }
+
+  .error-message {
+    margin-left: 3*$spacer;
   }
 
   .card-body {
