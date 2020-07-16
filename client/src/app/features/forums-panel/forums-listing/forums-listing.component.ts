@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, merge } from 'rxjs';
 import { ForumDto, CategoryClient, ForumClient, CategoryDto } from 'src/app/generated/forum-api.service';
 import { FiltersService } from 'src/app/services/filters.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forums-listing',
@@ -26,12 +26,23 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     this._filtersService.selectedCategory$
       .pipe(takeUntil(this._destroy$))
       .subscribe(category => {
-        if (!category.id) {
+        if (category.title === 'All') {
           this.forums$ = this._forumService.all(null, null);
           return;
         }
 
         this.forums$ = this._categoryService.listForums(category.id, null, null);
+      });
+
+    this._filtersService.searchTerm$
+      .pipe(
+        takeUntil(this._destroy$))
+      .subscribe(searchTerm => {
+        if (!searchTerm) {
+          return;
+        }
+
+        this.forums$ = this._forumService.search(searchTerm, null, null);
       });
   }
 
