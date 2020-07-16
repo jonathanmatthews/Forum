@@ -1,7 +1,11 @@
 @import '../../../../styles/variables';
 
-.card {
-  border-right: none;
-  border-left: none;
-  border-top: none;
+.forums-listing-container {
+  // TODO: truncate overflow-x
+  max-width: calc(100vw - 17rem - 5rem);
+  .card {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+  }
 }
