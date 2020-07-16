@@ -7,14 +7,11 @@
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Title" formControlName="title">
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="categories$ | async as categories">
       <label for="category">Category</label>
       <select class="form-control" id="category" formControlName="category">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        <option *ngFor="let category of categories"
+          value="{{category.id}}">{{category.title}}</option>
       </select>
     </div>
     <div class="form-group">
@@ -22,7 +19,8 @@
         placeholder="What would you like to discuss?" formControlName="text"></textarea>
     </div>
 
-    <button type="button" class="w-100-btn btn btn-dark" (click)="createForum()">
+    <button type="button" class="w-100-btn btn btn-dark" (click)="createForum()"
+      [disabled]="!formGroup.valid">
       Post forum
     </button>
   </form>
