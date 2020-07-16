@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ForumClient, CommentDto } from 'src/app/generated/forum-api.service';
 import { catchError } from 'rxjs/operators';
+import { Route } from '@angular/compiler/src/core';
+import { Subject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-add-comment',
@@ -11,7 +14,10 @@ import { catchError } from 'rxjs/operators';
 })
 export class AddCommentComponent implements OnInit {
 
-  constructor(private _route: ActivatedRoute, private _forumClient: ForumClient) { }
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    private _route: ActivatedRoute,
+    private _forumClient: ForumClient) { }
 
   public comment = new FormControl('', [Validators.minLength(1),
   Validators.maxLength(4000), Validators.required]);
@@ -37,6 +43,9 @@ export class AddCommentComponent implements OnInit {
         .subscribe(val => {
           this.unauthorised = false;
           this.comment.reset();
+
+          // Referesh page and go to comments list
+          this._document.defaultView.location.reload();
         });
     });
   }
