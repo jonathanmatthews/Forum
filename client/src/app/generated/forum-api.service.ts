@@ -580,6 +580,7 @@ export class ForumClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -842,38 +843,38 @@ export class ForumClient {
 }
 
 export interface UserDto {
-    Username?: string | undefined;
+    username?: string | undefined;
 }
 
 export interface CategoryDto {
-    Id: number;
-    Title: string;
-    Description?: string | undefined;
+    id: number;
+    title: string;
+    description?: string | undefined;
 }
 
 export interface ForumDto {
-    Id: number;
-    Author?: UserDto | undefined;
-    Category?: CategoryDto | undefined;
-    Title: string;
-    Text?: string | undefined;
-    CreationDate: Date;
-    CommentsCount: number;
+    id: number;
+    author?: UserDto | undefined;
+    category?: CategoryDto | undefined;
+    title: string;
+    text?: string | undefined;
+    creationDate: Date;
+    commentsCount: number;
 }
 
 export interface CommentDto {
-    Id: number;
-    Author?: UserDto | undefined;
-    Text: string;
-    CreationDate: Date;
-    ChildCommentsCount: number;
+    id: number;
+    author?: UserDto | undefined;
+    text: string;
+    creationDate: Date;
+    childCommentsCount: number;
 }
 
 export interface ChildCommentDto {
-    Id: number;
-    Author?: UserDto | undefined;
-    Text: string;
-    CreationDate: Date;
+    id: number;
+    author?: UserDto | undefined;
+    text: string;
+    creationDate: Date;
 }
 
 export class ApiException extends Error {
