@@ -190,7 +190,7 @@ namespace Server.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("Comment/{CommentId}/CreateChildComment")]
+        [Route("Comment/{commentId}/CreateChildComment")]
         public async Task<ActionResult<ChildCommentDto>> CreateChildComment([FromRoute] int commentId,
             [FromBody] ChildCommentDto newChildComment)
         {
