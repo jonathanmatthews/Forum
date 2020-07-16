@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { CategoryClient, CategoryDto, ForumDto } from 'src/app/generated/forum-api.service';
 import { Observable, Subject, of } from 'rxjs';
-import { Forum } from '../forum-details/forum-details.component';
 import { takeUntil, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 

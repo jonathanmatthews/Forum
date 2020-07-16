@@ -36,6 +36,7 @@ namespace Server.Controllers
             var forum = await _context.Forums
                 .Include(o => o.Author)
                 .Include(o => o.Category)
+                .Include(o => o.Comments)
                 .Where(o => o.Id == forumId)
                 .FirstOrDefaultAsync();
 
