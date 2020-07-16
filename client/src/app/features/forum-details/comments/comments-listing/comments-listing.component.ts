@@ -1,18 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
-export interface ChildComment {
-  author: string;
-  text: string;
-  creationDate: Date;
-}
-
-export interface Comment {
-  author: string;
-  text: string;
-  creationDate: Date;
-  childComments: ChildComment[];
-}
+import { CommentDto, ForumClient, ChildCommentDto } from 'src/app/generated/forum-api.service';
+import { ActivatedRoute } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comments-listing',
@@ -21,58 +11,49 @@ export interface Comment {
 })
 export class CommentsListingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _route: ActivatedRoute, private _forumClient: ForumClient) { }
 
   public childComment = new FormControl('', [Validators.minLength(1),
-    Validators.maxLength(4000), Validators.required]);
+  Validators.maxLength(4000), Validators.required]);
 
-  // TODO: replace with api version
-  public comments: Comment[] = [
-    {
-      author: 'user1',
-      text: 'Some comment 1',
-      creationDate: new Date(),
-      childComments: [
-        {
-          author: 'user2',
-          text: 'Some child comment 1',
-          creationDate: new Date(),
-        },
-        {
-          author: 'user5',
-          text: 'Some child comment 3',
-          creationDate: new Date(),
-        }
-      ]
-    } as Comment,
-    {
-      author: 'user3',
-      text: 'Some comment 2',
-      creationDate: new Date(),
-      childComments: [
-        {
-          author: 'user4',
-          text: 'Some child comment 2',
-          creationDate: new Date(),
-        }
-      ]
-    } as Comment,
-    {
-      author: 'user7',
-      text: 'Some comment 7',
-      creationDate: new Date(),
-      childComments: []
-    } as Comment
-  ];
+  public comments: CommentDto[] = [];
+  public childComments: ChildCommentDto[] = [];
+  public unauthorised = false;
 
   ngOnInit(): void {
+    this._getComments();
   }
 
-  public replyToComment(): void {
-    // TODO: send api request
-
+  public replyToComment(commentId: number): void {
     const text = this.childComment.value;
-    console.log(text);
+    this._forumClient.createChildComment(commentId, { text } as ChildCommentDto)
+      .pipe(
+        catchError(error => {
+          if (+error.status === 401) {
+            this.unauthorised = true;
+          }
+          return null;
+        })
+      )
+      .subscribe(val => {
+        this.unauthorised = false;
+        this.childComment.reset();
+        this._getComments();
+      });
   }
 
+  public getChildComments(commentId: number) {
+    this._forumClient.listChildComments(commentId, null, null)
+      .subscribe(val => {
+        this.childComments = val;
+      });
+  }
+
+  private _getComments(): void {
+    this._route.params.subscribe(params => {
+      const forumId = +params.id;
+      this._forumClient.listComments(forumId, null, null)
+        .subscribe(val => this.comments = val);
+    });
+  }
 }
