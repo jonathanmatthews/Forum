@@ -884,7 +884,7 @@ export class ForumClient {
     }
 
     createChildComment(commentId: number, newChildComment: ChildCommentDto | null): Observable<ChildCommentDto | null> {
-        let url_ = this.baseUrl + "/Forum/Comment/{CommentId}/CreateChildComment";
+        let url_ = this.baseUrl + "/Forum/Comment/{commentId}/CreateChildComment";
         if (commentId === undefined || commentId === null)
             throw new Error("The parameter 'commentId' must be defined.");
         url_ = url_.replace("{commentId}", encodeURIComponent("" + commentId));
