@@ -14,11 +14,11 @@ import { ForumsPanelComponent } from './features/forums-panel/forums-panel.compo
 import { ForumsHeaderComponent } from './features/forums-panel/forums-header/forums-header.component';
 import { ForumDetailsComponent } from './features/forum-details/forum-details.component';
 import { CommentsComponent } from './features/forum-details/comments/comments.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CreateForumComponent } from './features/create-forum/create-forum.component';
 import { AddCommentComponent } from './features/forum-details/comments/add-comment/add-comment.component';
 import { CommentsListingComponent } from './features/forum-details/comments/comments-listing/comments-listing.component';
 import { AuthClient, CategoryClient, ForumClient } from './generated/forum-api.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
