@@ -76,6 +76,16 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   }
 
   public logout(): void {
+    this._authClient.logout()
+      .pipe(
+        catchError((error: any) => {
+          this.errorMessage = 'An error has occured. Please try again.';
+          return of();
+        }),
+        takeUntil(this._destroy$))
+          .subscribe(() => {
+            this.user = null;
+        });
   }
 
   public toggleForm(): void {

@@ -17,8 +17,8 @@ import { CommentsComponent } from './features/forum-details/comments/comments.co
 import { CreateForumComponent } from './features/create-forum/create-forum.component';
 import { AddCommentComponent } from './features/forum-details/comments/add-comment/add-comment.component';
 import { CommentsListingComponent } from './features/forum-details/comments/comments-listing/comments-listing.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthClient, CategoryClient, ForumClient } from './generated/forum-api.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
