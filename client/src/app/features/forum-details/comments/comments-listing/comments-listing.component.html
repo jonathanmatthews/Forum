@@ -1,12 +1,12 @@
 <div class="card" *ngFor="let comment of comments; let i = index">
   <div class="card-header" id="heading">
-      <p class="card-title sub-text">@{{comment.author.username}} • {{comment.creationDate | date:'medium'}}</p>
-      <p class="card-text">{{comment.text}}</p>
-      <a data-toggle="collapse" attr.data-target="#reply-{{i}}" aria-expanded="true" aria-controls="reply"
+    <p class="card-title sub-text">@{{comment.author.username}} • {{comment.creationDate | date:'medium'}}</p>
+    <p class="card-text">{{comment.text}}</p>
+    <a data-toggle="collapse" attr.data-target="#reply-{{i}}" aria-expanded="true" aria-controls="reply"
       class="card-link clickable sm-font">Reply</a>
-      <a *ngIf="comment.childCommentsCount > 0"
-      data-toggle="collapse" attr.data-target="#child-comments-{{i}}" aria-expanded="true" aria-controls="child-comments"
-      class="card-link clickable sm-font" (click)="getChildComments(comment.id)">Show replies {{comment.childCommentsCount}}</a>
+    <a *ngIf="comment.childCommentsCount > 0" data-toggle="collapse" attr.data-target="#child-comments-{{i}}"
+      aria-expanded="true" aria-controls="child-comments" class="card-link clickable sm-font"
+      (click)="getChildComments(comment.id)">Show replies {{comment.childCommentsCount}}</a>
   </div>
 
   <!-- Reply to parent comment panel -->
@@ -14,10 +14,11 @@
     <div class="card-body input-group mb-3">
       <input type="text" class="form-control sm-font" placeholder="Reply to comment..." [formControl]="childComment">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary btn-sm" type="button"
-          (click)="replyToComment(comment.id)" [disabled]="childComment.invalid">
+        <button class="btn btn-outline-secondary btn-sm" type="button" (click)="replyToComment(comment.id)"
+          [disabled]="childComment.invalid">
           <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
         </button>
+        <p class="danger-font-colour" *ngIf="unauthorised">You must be logged in to post a comment.</p>
       </div>
     </div>
   </div>
@@ -25,7 +26,8 @@
   <!-- Child comments panel -->
   <div attr.id="child-comments-{{i}}" class="collapse" aria-labelledby="heading" data-parent="#accordion">
     <div class="child-comment card-body" *ngFor="let childComment of childComments">
-      <p class="card-title sub-text">@{{childComment.author.username}} • {{childComment.creationDate | date:'medium'}}</p>
+      <p class="card-title sub-text">@{{childComment.author.username}} • {{childComment.creationDate | date:'medium'}}
+      </p>
       <p class="card-text">{{childComment.text}}</p>
     </div>
   </div>
