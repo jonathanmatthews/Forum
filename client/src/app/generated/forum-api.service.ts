@@ -32,6 +32,7 @@ export class AuthClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -82,6 +83,7 @@ export class AuthClient {
             body: content_,
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -133,6 +135,7 @@ export class AuthClient {
             body: content_,
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -193,6 +196,7 @@ export class CategoryClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -244,6 +248,7 @@ export class CategoryClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -294,6 +299,7 @@ export class CategoryClient {
             body: content_,
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -345,6 +351,7 @@ export class CategoryClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -399,6 +406,7 @@ export class CategoryClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -452,6 +460,7 @@ export class CategoryClient {
             body: content_,
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -515,6 +524,7 @@ export class ForumClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -569,6 +579,7 @@ export class ForumClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -622,6 +633,7 @@ export class ForumClient {
             body: content_,
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -677,6 +689,7 @@ export class ForumClient {
         let options_ : any = {
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Accept": "application/json"
             })
@@ -730,6 +743,7 @@ export class ForumClient {
             body: content_,
             observe: "response",
             responseType: "blob",
+            withCredentials: true,
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
                 "Accept": "application/json"
