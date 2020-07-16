@@ -1,11 +1,16 @@
 @import '../../../../styles/variables';
 
 .forums-listing-container {
-  // TODO: truncate overflow-x
   max-width: calc(100vw - 17rem - 5rem);
+
   .card {
     border-right: none;
     border-left: none;
     border-top: none;
   }
+}
+
+.empty-message {
+  margin: 2*$spacer;
+  margin-left: $spacer;
 }
