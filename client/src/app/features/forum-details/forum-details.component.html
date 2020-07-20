@@ -1,11 +1,6 @@
 <div class="forum-details-container" *ngIf="forum">
   <div class="forum-header">
-    <h4 class="title">{{forum.category.title}} | {{forum.title}}
-      <button type="button" class="btn btn-dark"
-      (click)="goToCreateForum()">
-      Add new forum +
-    </button>
-    </h4>
+    <h4 class="title">{{forum.category.title}} | {{forum.title}}</h4>
   </div>
 
   <section class="forum-text">

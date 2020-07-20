@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { CategoryDto, CategoryClient } from 'src/app/generated/forum-api.service';
+import { FiltersService } from '../../services/filters.service';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-side-panel',
@@ -7,25 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidePanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _categoryService: CategoryClient,
+    private _filterService: FiltersService
+  ) { }
 
-  // TODO: Make into observable once API is implemented.
-  public categories: string[] = [
-    'Category 1',
-    'Category 2',
-    'Category 3',
-    'Category 4',
-    'Category 5',
-  ];
+  public categories$: Observable<CategoryDto[]>;
+  public activeCategory: CategoryDto;
 
-  public activeCategory = this.categories[0];
+  public ngOnInit(): void {
+    this.categories$ = this._categoryService.listCategories(null, null)
+      .pipe(
+        map((categories) => {
+          const all = {
+            id: null,
+            title: 'All'
+          } as CategoryDto;
 
-  ngOnInit(): void {
+          // Add 'All' option at the beginning
+          return [all].concat(categories);
+        }),
+        tap((categories) => {
+          this.activeCategory = categories[0];
+          this._filterService.updateCategory(this.activeCategory);
+        })
+      );
   }
 
-  public getCategory(category: string): void {
+  public getCategory(category: CategoryDto): void {
     this.activeCategory = category;
-    // TODO: update category listing
+    this._filterService.updateCategory(category);
   }
 
 }

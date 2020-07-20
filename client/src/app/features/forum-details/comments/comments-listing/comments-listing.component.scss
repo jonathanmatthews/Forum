@@ -5,6 +5,11 @@
   padding-top: $spacer;
   margin-right: 2*$spacer;
 
+  .empty-listing {
+    margin-top: $spacer;
+    margin-bottom: $spacer;
+  }
+
   .card-header {
     border: none;
   }

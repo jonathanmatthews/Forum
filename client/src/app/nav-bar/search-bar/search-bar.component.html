@@ -1,4 +1,9 @@
 <form class="form-inline my-2 my-lg-0">
-  <input class="search form-control mr-sm-2" type="text" placeholder="Search">
-  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  <input class="search form-control sm-font" type="text" placeholder="Search"
+    [formControl]="searchTerm">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit"
+    [disabled]="searchTerm.invalid"
+    (click)="search()">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
 </form>
