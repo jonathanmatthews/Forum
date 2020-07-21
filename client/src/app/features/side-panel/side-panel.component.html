@@ -6,10 +6,15 @@
       <li class="list-group-item clickable">
 
       </li>
-      <li class="list-group-item clickable"
-        *ngFor="let category of categories"
-        [ngClass]="{'clicked': category === activeCategory}"
-        (click)="getCategory(category)">{{category.title}}</li>
+      <li class="list-group-item clickable" *ngFor="let category of categories"
+        [ngClass]="{'clicked': category === activeCategory}" (click)="getCategory(category)">{{category.title}}</li>
+
+      <li>
+        <button type="button" class="btn btn-dark" *ngIf="pageNumber + 1 < totalPages"
+          (click)="showMoreCategories()">Show more
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+      </li>
     </ul>
   </div>
 </div>
