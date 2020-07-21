@@ -32,13 +32,18 @@ export class UserMenuComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this._authClient.getAccountInfo()
-      .pipe(takeUntil(this._destroy$), catchError(() => null))
-          .subscribe(user => {
-            if (user) {
-              this.user = user;
-            }
+      .pipe(
+        catchError(error => {
+          if (+error.status === 401) {
+            return of();
           }
-        );
+        }),
+        takeUntil(this._destroy$))
+        .subscribe(user => {
+          if (user) {
+            this.user = user;
+          }
+        });
   }
 
   public ngOnDestroy(): void {

@@ -12,7 +12,9 @@ export class NavBarComponent implements OnInit {
     private _router: Router
   ) { }
 
-  ngOnInit(): void {
+  public hideAddForumButton = false;
+
+  public ngOnInit(): void {
   }
 
   public goToCreateForum(): void {

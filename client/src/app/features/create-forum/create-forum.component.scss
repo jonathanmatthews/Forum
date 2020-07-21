@@ -23,5 +23,10 @@
       padding-top: $spacer;
       padding-bottom: $spacer;
     }
+
+    .error-message {
+      margin-top: 1*$spacer;
+      margin-bottom: 2*$spacer;
+    }
   }
 }

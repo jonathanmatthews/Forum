@@ -22,5 +22,7 @@
     <button type="button" class="w-100-btn btn btn-dark" (click)="createForum()" [disabled]="!formGroup.valid">
       Post forum
     </button>
+
+    <p class="error-message danger-font" *ngIf="errorMessage">{{errorMessage}}</p>
   </form>
 </div>
