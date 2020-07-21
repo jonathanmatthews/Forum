@@ -48,5 +48,9 @@
       padding-left: $spacer;
       padding-right: $spacer;
     }
+
+    .last-child-comment {
+      margin-bottom: $spacer;
+    }
   }
 }

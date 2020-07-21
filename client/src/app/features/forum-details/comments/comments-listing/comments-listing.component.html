@@ -7,7 +7,9 @@
         class="card-link clickable sm-font">Reply</a>
       <a *ngIf="comment.childCommentsCount > 0" data-toggle="collapse" attr.data-target="#child-comments-{{i}}"
         aria-expanded="true" aria-controls="child-comments" class="card-link clickable sm-font"
-        (click)="getChildComments(comment.id)">Show replies {{comment.childCommentsCount}}</a>
+        (click)="toggleChildComments(comment.id, comment.childCommentsCount)">Show replies {{comment.childCommentsCount}}
+        <i class="fa" [ngClass]="comment.id === visibleChildCommentsParentId? 'fa-angle-up' : 'fa-angle-down'"></i>
+      </a>
     </div>
 
     <!-- Reply to parent comment panel -->
@@ -26,13 +28,45 @@
 
     <!-- Child comments panel -->
     <div attr.id="child-comments-{{i}}" class="collapse" aria-labelledby="heading" data-parent="#accordion">
-      <div class="child-comment card-body" *ngFor="let childComment of childComments">
+      <div class="child-comment card-body" *ngFor="let childComment of childComments; let j = index">
         <p class="card-title sub-text">@{{childComment.author.username}} • {{childComment.creationDate | date:'medium'}}
         </p>
-        <p class="card-text">{{childComment.text}}</p>
+        <p class="card-text"
+          [ngClass]="{'last-child-comment': j+1 === childComments.length && comment.childCommentsCount > childCommentsPageSize}">
+          {{childComment.text}}
+        </p>
+
+        <!-- Child comments paging -->
+        <div *ngIf="j+1 === childComments.length && comment.childCommentsCount > childCommentsPageSize">
+          <a *ngIf="childCommentsPageNumber + 1 < childCommentsTotalPages"
+            class="card-link clickable link sm-font"
+            (click)="showMoreChildComments()">Show more
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </a>
+          <a *ngIf="childCommentsPageNumber + 1 === childCommentsTotalPages"
+            class="card-link clickable link sm-font"
+            (click)="showLessChildComments()">Show less
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
+
+  <!-- Comments paging -->
+  <button type="button" class="w-100-btn btn btn-dark"
+    *ngIf="pageNumber + 1 < totalPages"
+    (click)="showMoreComments()">Show more
+    <i class="fa fa-angle-down" aria-hidden="true"></i>
+  </button>
+
+  <button type="button" class="w-100-btn btn btn-dark"
+    *ngIf="pageNumber + 1 === totalPages"
+    (click)="showLessComments()">Show less
+    <i class="fa fa-angle-up" aria-hidden="true"></i>
+  </button>
+
 </ng-container>
 
 <ng-template #emptyListing>
