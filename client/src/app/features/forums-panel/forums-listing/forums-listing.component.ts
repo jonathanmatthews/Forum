@@ -19,6 +19,9 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     private _router: Router) { }
 
   public forums$: Observable<ForumDto[]>;
+  public pageNumber = 1;
+  public pageSize = 10;
+  public forumsCount: number;
 
   private _destroy$ = new Subject();
 
