@@ -1,32 +1,67 @@
 @import '../../../styles/variables';
 
-.create-forum-container {
-  margin-top: $nav-bar-height;
-  margin-bottom: 2*$spacer;
-  margin-left: $side-panel-width + 2*$spacer;
-  margin-right: $side-panel-width + 2*$spacer;
+@media (max-width: 900px) {
+  .create-forum-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: 1rem;;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
-  .header {
-    padding-top: 3*$spacer;
-    border-bottom: $border-line;
+    .header {
+      padding-top: 3*$spacer;
+      border-bottom: $border-line;
 
-    .title {
-      padding-bottom: $spacer;
+      .title {
+        padding-bottom: $spacer;
+      }
+    }
+
+    .forum-form {
+      margin: 2*$spacer;
+      line-height: 2*$spacer;
+
+      .btn {
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+      }
+
+      .error-message {
+        margin-top: 1*$spacer;
+        margin-bottom: 2*$spacer;
+      }
     }
   }
+}
 
-  .forum-form {
-    margin: 2*$spacer;
-    line-height: 2*$spacer;
+@media (min-width: 901px) {
+  .create-forum-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: 2*$spacer;
+    margin-left: $side-panel-width + 2*$spacer;
+    margin-right: $side-panel-width + 2*$spacer;
 
-    .btn {
-      padding-top: $spacer;
-      padding-bottom: $spacer;
+    .header {
+      padding-top: 3*$spacer;
+      border-bottom: $border-line;
+
+      .title {
+        padding-bottom: $spacer;
+      }
     }
 
-    .error-message {
-      margin-top: 1*$spacer;
-      margin-bottom: 2*$spacer;
+    .forum-form {
+      margin: 2*$spacer;
+      line-height: 2*$spacer;
+
+      .btn {
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+      }
+
+      .error-message {
+        margin-top: 1*$spacer;
+        margin-bottom: 2*$spacer;
+      }
     }
   }
 }
