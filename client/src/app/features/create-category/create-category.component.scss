@@ -1,27 +1,58 @@
 @import '../../../styles/variables';
 
-.create-category-container {
-  margin-top: $nav-bar-height;
-  margin-bottom: 2*$spacer;
-  margin-left: $side-panel-width + 2*$spacer;
-  margin-right: $side-panel-width + 2*$spacer;
+@media (max-width: 900px) {
+  .create-category-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
-  .header {
-    padding-top: 2*$spacer;
-    border-bottom: $border-line;
+    .header {
+      padding-top: 2*$spacer;
+      border-bottom: $border-line;
 
-    .title {
-      padding-bottom: $spacer;
+      .title {
+        padding-bottom: $spacer;
+      }
+    }
+
+    .forum-form {
+      margin: 2*$spacer;
+      line-height: 2*$spacer;
+
+      .btn {
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+      }
     }
   }
+}
 
-  .forum-form {
-    margin: 2*$spacer;
-    line-height: 2*$spacer;
 
-    .btn {
-      padding-top: $spacer;
-      padding-bottom: $spacer;
+@media (min-width: 901px) {
+  .create-category-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: 2*$spacer;
+    margin-left: $side-panel-width + 2*$spacer;
+    margin-right: $side-panel-width + 2*$spacer;
+
+    .header {
+      padding-top: 2*$spacer;
+      border-bottom: $border-line;
+
+      .title {
+        padding-bottom: $spacer;
+      }
+    }
+
+    .forum-form {
+      margin: 2*$spacer;
+      line-height: 2*$spacer;
+
+      .btn {
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+      }
     }
   }
 }
