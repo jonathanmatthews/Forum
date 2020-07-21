@@ -1,22 +1,62 @@
 @import '../../../styles/variables';
 
-.home-container {
-  margin-top: $nav-bar-height;
-  margin-bottom: $spacer;
-  padding: 0;
-  max-width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: $side-panel-width auto;
-  grid-template-areas:
-    "side-panel forums-listing";
+@media (max-width: 901px) {
+  .home-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: $spacer;
+    padding: 0;
+    max-width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0 auto;
+    grid-template-areas:
+      "side-panel forums-listing";
+
+    .side-panel {
+      grid-area: side-panel;
+      display: none;
+    }
+
+    .forums-panel {
+      margin: 2*$spacer;
+      grid-area: forums-listing;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .home-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: $spacer;
+    padding: 0;
+    max-width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: $side-panel-width auto;
+    grid-template-areas:
+      "side-panel forums-listing";
+
+    .side-panel {
+      grid-area: side-panel;
+    }
+
+    .forums-panel {
+      margin: 2*$spacer;
+      grid-area: forums-listing;
+    }
+  }
+}
+
+.home-container_show-categories {
+  grid-template-columns: auto auto;
 
   .side-panel {
-    grid-area: side-panel;
+    display: block;
+    background-color: white;
+    z-index: 1;
   }
 
   .forums-panel {
-    margin: 2*$spacer;
-    grid-area: forums-listing;
+    z-index: 0;
   }
 }

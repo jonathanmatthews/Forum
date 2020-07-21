@@ -1,6 +1,6 @@
 form {
   .search {
-    width: 25rem;
+    width: 40vw;
     margin-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -10,5 +10,13 @@ form {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding: .4rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  form {
+    .search {
+      width: 70vw;
+    }
   }
 }

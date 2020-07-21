@@ -1,33 +1,71 @@
 @import '../../../styles/variables';
 
-.forum-details-container {
-  margin-top: $nav-bar-height;
-  margin-bottom: 2*$spacer;
-  margin-left: $side-panel-width + 2*$spacer;
-  margin-right: $side-panel-width + 2*$spacer;
 
-  .forum-header {
-    padding-top: 4*$spacer;
-    border-bottom: $border-line;
+@media (max-width: 900px) {
+  .forum-details-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
-    .title {
-      padding-bottom: $spacer;
+    .forum-header {
+      padding-top: 2*$spacer;
+      border-bottom: $border-line;
 
-      .btn {
-        float: right;
+      .title {
+        padding-bottom: $spacer;
+
+        .btn {
+          float: right;
+        }
       }
+    }
+
+    .forum-text, .forum-details {
+      margin: 2*$spacer;
+    }
+
+    .forum-text {
+      margin-bottom: 3*$spacer;
+    }
+
+    .forum-details {
+      text-align: right;
     }
   }
 
-  .forum-text, .forum-details {
-    margin: 2*$spacer;
-  }
+}
 
-  .forum-text {
-    margin-bottom: 3*$spacer;
-  }
+@media (min-width: 901px) {
+  .forum-details-container {
+    margin-top: $nav-bar-height;
+    margin-bottom: 2*$spacer;
+    margin-left: $side-panel-width + 2*$spacer;
+    margin-right: $side-panel-width + 2*$spacer;
 
-  .forum-details {
-    text-align: right;
+    .forum-header {
+      padding-top: 4*$spacer;
+      border-bottom: $border-line;
+
+      .title {
+        padding-bottom: $spacer;
+
+        .btn {
+          float: right;
+        }
+      }
+    }
+
+    .forum-text, .forum-details {
+      margin: 2*$spacer;
+    }
+
+    .forum-text {
+      margin-bottom: 3*$spacer;
+    }
+
+    .forum-details {
+      text-align: right;
+    }
   }
 }

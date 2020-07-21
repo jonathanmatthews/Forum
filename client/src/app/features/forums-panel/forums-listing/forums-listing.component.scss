@@ -1,7 +1,13 @@
 @import '../../../../styles/variables';
 
 .forums-listing-container {
-  max-width: calc(100vw - 17rem - 5rem);
+  @media (max-width: 900px) {
+    max-width: calc(100vw - 0rem - 5rem);
+  }
+
+  @media (min-width: 901px) {
+    max-width: calc(100vw - 17rem - 5rem);
+  }
 
   .pager {
     display: flex;

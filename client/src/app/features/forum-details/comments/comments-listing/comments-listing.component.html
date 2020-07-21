@@ -8,7 +8,7 @@
       <a *ngIf="comment.childCommentsCount > 0" data-toggle="collapse" attr.data-target="#child-comments-{{i}}"
         aria-expanded="true" aria-controls="child-comments" class="card-link clickable sm-font"
         (click)="toggleChildComments(comment.id, comment.childCommentsCount)">Show replies {{comment.childCommentsCount}}
-        <i class="fa" [ngClass]="comment.id === visibleChildCommentsParentId? 'fa-angle-up' : 'fa-angle-down'"></i>
+        <i class="fa" [ngClass]="comment.id === visibleChildCommentsParentId ? 'fa-angle-up' : 'fa-angle-down'"></i>
       </a>
     </div>
 
@@ -55,7 +55,8 @@
   </div>
 
   <!-- Comments paging -->
-  <button type="button" class="w-100-btn btn btn-dark"
+  <div *ngIf="commentsCount > pageSize ">
+    <button type="button" class="w-100-btn btn btn-dark"
     *ngIf="pageNumber + 1 < totalPages"
     (click)="showMoreComments()">Show more
     <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -66,6 +67,7 @@
     (click)="showLessComments()">Show less
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
+  </div>
 
 </ng-container>
 

@@ -1,9 +1,9 @@
-<div class="home-container">
+<div class="home-container" [class.home-container_show-categories]="showCategories | async">
   <section class="side-panel">
     <app-side-panel></app-side-panel>
   </section>
 
   <section class="forums-panel">
-    <app-forums-panel></app-forums-panel>
+    <app-forums-panel (clicked)="click()"></app-forums-panel>
   </section>
 </div>
