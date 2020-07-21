@@ -3,3 +3,10 @@
 .form-title {
   margin-bottom: $spacer;
 }
+
+@media (max-width: 768px) {
+  .dropdown-menu-right {
+    right: auto;
+    left: 0;
+  }
+}
