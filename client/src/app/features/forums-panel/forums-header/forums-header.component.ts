@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-forums-header',
@@ -9,7 +9,13 @@ export class ForumsHeaderComponent implements OnInit {
 
   constructor( ) { }
 
+  @Output() clicked = new EventEmitter<void>();
+
   ngOnInit(): void {
+  }
+
+  click() {
+    this.clicked.next();
   }
 
 }
