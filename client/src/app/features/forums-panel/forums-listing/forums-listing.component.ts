@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of, Subject, merge } from 'rxjs';
-import { ForumDto, CategoryClient, ForumClient, CategoryDto } from 'src/app/generated/forum-api.service';
+import { Observable, Subject } from 'rxjs';
+import { ForumDto, CategoryClient, ForumClient } from 'src/app/generated/forum-api.service';
 import { FiltersService } from 'src/app/services/filters.service';
-import { takeUntil, switchMap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Page } from 'src/app/shared/page';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-forums-listing',
@@ -21,32 +23,12 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
   public forums$: Observable<ForumDto[]>;
   public pageNumber = 1;
   public pageSize = 10;
-  public forumsCount: number;
+  public forumsCount$: Observable<number>;
 
   private _destroy$ = new Subject();
 
   public ngOnInit(): void {
-    this._filtersService.selectedCategory$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(category => {
-        if (category.title === 'All') {
-          this.forums$ = this._forumService.all(null, null);
-          return;
-        }
-
-        this.forums$ = this._categoryService.listForums(category.id, null, null);
-      });
-
-    this._filtersService.searchTerm$
-      .pipe(
-        takeUntil(this._destroy$))
-      .subscribe(searchTerm => {
-        if (!searchTerm) {
-          return;
-        }
-
-        this.forums$ = this._forumService.search(searchTerm, null, null);
-      });
+    this.loadForums();
   }
 
   public ngOnDestroy(): void {
@@ -58,4 +40,37 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     this._router.navigate(['/forums', forum.id]);
   }
 
+  public getPrevPage(prevPage: Page): void {
+    this.pageNumber = prevPage.pageNumber;
+    this.pageSize = prevPage.pageSize;
+  }
+
+  public getNextPage(nextPage: Page): void {
+    this.pageNumber = nextPage.pageNumber;
+    this.pageSize = nextPage.pageSize;
+  }
+
+  private loadForums(): void {
+    this._filtersService.selectedCategory$
+    .pipe(takeUntil(this._destroy$))
+    .subscribe(category => {
+      if (category.title === 'All') {
+        this.forums$ = this._forumService.all(this.pageSize, this.pageNumber);
+        return;
+      }
+
+      this.forums$ = this._categoryService.listForums(category.id, this.pageSize, this.pageNumber);
+    });
+
+    this._filtersService.searchTerm$
+      .pipe(
+        takeUntil(this._destroy$))
+      .subscribe(searchTerm => {
+        if (!searchTerm) {
+          return;
+        }
+
+        this.forums$ = this._forumService.search(searchTerm, this.pageSize, this.pageNumber);
+      });
+    }
 }

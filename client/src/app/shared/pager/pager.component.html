@@ -1,0 +1,19 @@
+<nav *ngIf="count > 0">
+  <ul class="pagination">
+    <li class="page-item"
+      [ngClass]="{'disabled': pageNumber === 1}">
+      <a class="page-link"
+        [ngClass]="{'clickable link': pageNumber > 1}"
+        (click)="goToPrevPage()">Previous</a>
+    </li>
+    <li class="page-item">
+      <a class="page-descr normal-font-colour">Page {{this.pageNumber}} of {{this.totalPages}}</a>
+    </li>
+    <li class="page-item"
+      [ngClass]="{'disabled': pageNumber === totalPages}">
+      <a class="page-link"
+        [ngClass]="{'clickable link': pageNumber < totalPages}"
+        (click)="goToNextPage()">Next</a>
+    </li>
+  </ul>
+</nav>
