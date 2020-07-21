@@ -1,0 +1,27 @@
+@import '../../../styles/variables';
+
+.create-category-container {
+  margin-top: $nav-bar-height;
+  margin-bottom: 2*$spacer;
+  margin-left: $side-panel-width + 2*$spacer;
+  margin-right: $side-panel-width + 2*$spacer;
+
+  .header {
+    padding-top: 2*$spacer;
+    border-bottom: $border-line;
+
+    .title {
+      padding-bottom: $spacer;
+    }
+  }
+
+  .forum-form {
+    margin: 2*$spacer;
+    line-height: 2*$spacer;
+
+    .btn {
+      padding-top: $spacer;
+      padding-bottom: $spacer;
+    }
+  }
+}
