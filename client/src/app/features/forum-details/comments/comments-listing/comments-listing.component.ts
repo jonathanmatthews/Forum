@@ -4,7 +4,6 @@ import { CommentDto, ForumClient, ChildCommentDto } from 'src/app/generated/foru
 import { ActivatedRoute } from '@angular/router';
 import { catchError, takeUntil } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
-import { ChildCommentsPagingService } from './child-comments-paging.service';
 
 @Component({
   selector: 'app-comments-listing',
@@ -13,10 +12,7 @@ import { ChildCommentsPagingService } from './child-comments-paging.service';
 })
 export class CommentsListingComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _forumClient: ForumClient,
-    private _childCommentsPagingService: ChildCommentsPagingService) { }
+  constructor(private _route: ActivatedRoute, private _forumClient: ForumClient) { }
 
   public childComment = new FormControl('', [Validators.minLength(1),
   Validators.maxLength(4000), Validators.required]);
@@ -40,7 +36,6 @@ export class CommentsListingComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject();
 
   ngOnInit(): void {
-    this._childCommentsPagingService.updatePageSize(this.pageSize);
     this.totalPages = Math.ceil(this.commentsCount / this.pageSize);
     this._getComments();
   }
