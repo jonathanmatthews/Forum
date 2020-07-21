@@ -98,6 +98,13 @@ namespace Server.Controllers
         }
 
         [HttpGet]
+        [Route("CountAll")]
+        public async Task<ActionResult<int>> CountAll()
+        {
+            return await _context.Forums.CountAsync();
+        }
+
+        [HttpGet]
         [Route("{forumId}/ListComments")]
         public async Task<ActionResult<CommentDto[]>> ListComments([FromRoute] int forumId,
             [FromQuery] int? itemsPerPage = null, [FromQuery] int? pageNumber = null)
