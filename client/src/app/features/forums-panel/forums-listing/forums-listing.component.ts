@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of, Subject, merge } from 'rxjs';
-import { ForumDto, CategoryClient, ForumClient, CategoryDto } from 'src/app/generated/forum-api.service';
+import { Observable, Subject, BehaviorSubject, combineLatest, of } from 'rxjs';
+import { ForumDto, CategoryClient, ForumClient } from 'src/app/generated/forum-api.service';
 import { FiltersService } from 'src/app/services/filters.service';
-import { takeUntil, switchMap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forums-listing',
@@ -19,31 +19,15 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     private _router: Router) { }
 
   public forums$: Observable<ForumDto[]>;
+  public forumsCount$: Observable<number>;
+  public pageNumber = 0;
+  public pageSize = 5;
 
+  private _pageNumberSubject = new BehaviorSubject<number>(0);
   private _destroy$ = new Subject();
 
   public ngOnInit(): void {
-    this._filtersService.selectedCategory$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(category => {
-        if (category.title === 'All') {
-          this.forums$ = this._forumService.all(null, null);
-          return;
-        }
-
-        this.forums$ = this._categoryService.listForums(category.id, null, null);
-      });
-
-    this._filtersService.searchTerm$
-      .pipe(
-        takeUntil(this._destroy$))
-      .subscribe(searchTerm => {
-        if (!searchTerm) {
-          return;
-        }
-
-        this.forums$ = this._forumService.search(searchTerm, null, null);
-      });
+    this.loadForums();
   }
 
   public ngOnDestroy(): void {
@@ -55,4 +39,43 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     this._router.navigate(['/forums', forum.id]);
   }
 
+  public getPrevPage(prevPage: number): void {
+    this.pageNumber = prevPage;
+    this._pageNumberSubject.next(prevPage);
+  }
+
+  public getNextPage(nextPage: number): void {
+    this.pageNumber = nextPage;
+    this._pageNumberSubject.next(nextPage);
+  }
+
+  private loadForums(): void {
+    combineLatest(
+      [this._filtersService.selectedCategory$,
+      this._pageNumberSubject.asObservable()])
+        .pipe(takeUntil(this._destroy$))
+        .subscribe(([category, pageNumber]) => {
+          if (category.title === 'All') {
+            this.forums$ = this._forumService.all(this.pageSize, pageNumber);
+            this.forumsCount$ = this._forumService.countAll();
+            return;
+          }
+
+          this.forums$ = this._categoryService.listForums(category.id, this.pageSize, pageNumber);
+          this.forumsCount$ = this._categoryService.countForums(category.id);
+        });
+
+    combineLatest(
+      [this._filtersService.searchTerm$,
+      this._pageNumberSubject.asObservable()])
+      .pipe(
+        takeUntil(this._destroy$))
+      .subscribe(([searchTerm, pageNumber]) => {
+        if (!searchTerm) {
+          return;
+        }
+
+        this.forums$ = this._forumService.search(searchTerm, this.pageSize, pageNumber);
+      });
+    }
 }

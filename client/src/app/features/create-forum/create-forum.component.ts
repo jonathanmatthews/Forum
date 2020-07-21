@@ -29,7 +29,7 @@ export class CreateForumComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject();
 
   public ngOnInit(): void {
-    this.categories$ = this._categoryService.listCategories(10, 0);
+    this.categories$ = this._categoryService.listCategories(null, null);
   }
 
   public ngOnDestroy(): void {

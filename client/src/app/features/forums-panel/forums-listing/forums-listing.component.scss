@@ -3,6 +3,13 @@
 .forums-listing-container {
   max-width: calc(100vw - 17rem - 5rem);
 
+  .pager {
+    display: flex;
+    justify-content: center;
+    margin-left: $spacer;
+    margin-top: 2*$spacer;
+  }
+
   .card {
     border-right: none;
     border-left: none;
