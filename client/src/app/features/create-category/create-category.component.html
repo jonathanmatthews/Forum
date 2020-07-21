@@ -16,5 +16,7 @@
       <button type="button" class="w-100-btn btn btn-dark" (click)="createCategory()" [disabled]="!formGroup.valid">
         Post category
       </button>
+
+      <p class="error-message danger-font" *ngIf="errorMessage">{{errorMessage}}</p>
     </form>
   </div>

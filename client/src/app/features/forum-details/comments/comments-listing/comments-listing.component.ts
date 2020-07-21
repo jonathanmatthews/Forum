@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { CommentDto, ForumClient, ChildCommentDto } from 'src/app/generated/forum-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-comments-listing',
@@ -32,7 +33,7 @@ export class CommentsListingComponent implements OnInit {
           if (+error.status === 401) {
             this.unauthorised = true;
           }
-          return null;
+          return of();
         })
       )
       .subscribe(val => {
