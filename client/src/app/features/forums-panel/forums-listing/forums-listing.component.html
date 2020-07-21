@@ -1,12 +1,5 @@
 <div class="forums-listing-container" *ngIf="forums$ | async as forums">
   <ng-container *ngIf="forums.length > 0; else emptyListing">
-    <app-pager
-      [pageNumber]="pageNumber"
-      [pageSize]="pageSize"
-      (prevBtnClicked)="getPrevPage($event)"
-      (nextBtnClicked)="getNextPage($event)">
-    </app-pager>
-
     <div class="card" *ngFor="let forum of forums">
       <div class="card-body">
         <h5 class="card-title clickable accent-colour"
@@ -15,6 +8,17 @@
         <p class="card-text text-truncate">{{forum.text}}</p>
         <p class="sub-text">Created at {{forum.creationDate | date:'medium'}}</p>
       </div>
+    </div>
+
+    <div class="pager">
+      <app-pager
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [count$]="forumsCount$"
+        [showCountInfo]="true"
+        (prevBtnClicked)="getPrevPage($event)"
+        (nextBtnClicked)="getNextPage($event)">
+      </app-pager>
     </div>
   </ng-container>
 </div>

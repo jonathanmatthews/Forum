@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pager',
@@ -14,7 +15,9 @@ export class PagerComponent implements OnInit {
   @Input()
   public pageSize: number;
   @Input()
-  public count = 6;
+  public count$: Observable<number>;
+  @Input()
+  public showCountInfo = false;
 
   @Output()
   public prevBtnClicked: EventEmitter<number> = new EventEmitter();
@@ -22,9 +25,13 @@ export class PagerComponent implements OnInit {
   public nextBtnClicked: EventEmitter<number> = new EventEmitter();
 
   public totalPages: number;
+  public count: number;
 
   public ngOnInit(): void {
-    this.totalPages = Math.ceil(this.count / this.pageSize);
+    this.count$.subscribe(count => {
+      this.count = count;
+      this.totalPages = Math.ceil(count / this.pageSize);
+    });
   }
 
   public goToPrevPage(): void {
@@ -45,6 +52,22 @@ export class PagerComponent implements OnInit {
     this.pageNumber++;
 
     this.nextBtnClicked.emit(this.pageNumber);
+  }
+
+  public getDisplayedCount(): string {
+    let string: string;
+
+    if (this.pageNumber + 1 === this.totalPages) {
+      string = `${this.count}-${this.count}`;
+      return string;
+    }
+
+    const lowerBound = (this.pageNumber * this.pageSize) + 1;
+    const upperBound = (this.pageNumber + 1) * this.pageSize;
+
+    string = `${lowerBound}-${upperBound}`;
+
+    return string;
   }
 
 }

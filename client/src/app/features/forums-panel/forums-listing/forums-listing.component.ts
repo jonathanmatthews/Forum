@@ -19,9 +19,9 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     private _router: Router) { }
 
   public forums$: Observable<ForumDto[]>;
+  public forumsCount$: Observable<number>;
   public pageNumber = 0;
   public pageSize = 5;
-  public forumsCount$: Observable<number>;
 
   private _pageNumberSubject = new BehaviorSubject<number>(0);
   private _destroy$ = new Subject();
@@ -57,6 +57,7 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
         .subscribe(([category, pageNumber]) => {
           if (category.title === 'All') {
             this.forums$ = this._forumService.all(this.pageSize, pageNumber);
+            this.forumsCount$ = this._forumService.countAll();
             return;
           }
 
