@@ -19,6 +19,8 @@
   .category-list {
     .list-group {
       border-radius: 0;
+      overflow-y: auto;
+      height: calc(100vh - 114px);
 
       .list-group-item {
         border: none;
@@ -28,6 +30,10 @@
       .clicked {
         filter: $darken-filter;
         font-weight: 700;
+      }
+
+      button {
+        width: 100%;
       }
     }
   }
