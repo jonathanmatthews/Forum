@@ -4,6 +4,10 @@
   margin-right: $spacer;
 }
 
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
 // 768px is bootstrap's min width for class 'navbar-expand-md'
 @media (max-width: 768px) {
   .create-forum, .user-menu {
