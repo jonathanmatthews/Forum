@@ -52,7 +52,6 @@ export class CreateForumComponent implements OnInit, OnDestroy {
     this._categoryService.createForum(categoryId, newForum)
       .pipe(
         catchError(error => {
-          console.log(error);
           if (+error.status === 401) {
             this.errorMessage = 'You must be logged in to post a forum.';
           }

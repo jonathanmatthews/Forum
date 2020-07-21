@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ForumClient, CommentDto } from 'src/app/generated/forum-api.service';
 import { catchError } from 'rxjs/operators';
 import { Route } from '@angular/compiler/src/core';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -37,7 +37,7 @@ export class AddCommentComponent implements OnInit {
             if (+error.status === 401) {
               this.unauthorised = true;
             }
-            return null;
+            return of();
           })
         )
         .subscribe(val => {
