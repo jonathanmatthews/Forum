@@ -18,7 +18,7 @@
   .category-list {
     .list-group {
       border-radius: 0;
-      overflow-y: scroll;
+      overflow-y: auto;
       height: calc(100vh - 114px);
 
       .list-group-item {
