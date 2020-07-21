@@ -56,17 +56,21 @@ export class PagerComponent implements OnInit {
 
   public getDisplayedCount(): string {
     let string: string;
+    let lowerBound: number;
+    let upperBound: number;
+
+    lowerBound = (this.pageNumber * this.pageSize) + 1;
 
     if (this.pageNumber + 1 === this.totalPages) {
-      string = `${this.count}-${this.count}`;
+      upperBound = this.count;
+
+      string = `${lowerBound}-${upperBound}`;
       return string;
     }
 
-    const lowerBound = (this.pageNumber * this.pageSize) + 1;
-    const upperBound = (this.pageNumber + 1) * this.pageSize;
+    upperBound = (this.pageNumber + 1) * this.pageSize;
 
     string = `${lowerBound}-${upperBound}`;
-
     return string;
   }
 

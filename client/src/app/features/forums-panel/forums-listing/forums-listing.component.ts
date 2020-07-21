@@ -62,6 +62,7 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
           }
 
           this.forums$ = this._categoryService.listForums(category.id, this.pageSize, pageNumber);
+          this.forumsCount$ = this._categoryService.countForums(category.id);
         });
 
     combineLatest(
