@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Page } from '../page';
-
 
 @Component({
   selector: 'app-pager',
@@ -12,16 +10,16 @@ export class PagerComponent implements OnInit {
   constructor() { }
 
   @Input()
-  public pageNumber = 1;
+  public pageNumber: number;
   @Input()
-  public pageSize = 3;
+  public pageSize: number;
   @Input()
-  public count = 10;
+  public count = 6;
 
   @Output()
-  public prevBtnClicked: EventEmitter<Page> = new EventEmitter();
+  public prevBtnClicked: EventEmitter<number> = new EventEmitter();
   @Output()
-  public nextBtnClicked: EventEmitter<Page> = new EventEmitter();;
+  public nextBtnClicked: EventEmitter<number> = new EventEmitter();
 
   public totalPages: number;
 
@@ -36,12 +34,7 @@ export class PagerComponent implements OnInit {
 
     this.pageNumber--;
 
-    const prevPage = {
-      pageNumber: this.pageNumber,
-      pageSize: this.pageNumber
-    } as Page;
-
-    this.prevBtnClicked.emit(prevPage);
+    this.prevBtnClicked.emit(this.pageNumber);
   }
 
   public goToNextPage(): void {
@@ -51,12 +44,7 @@ export class PagerComponent implements OnInit {
 
     this.pageNumber++;
 
-    const nextPage = {
-      pageNumber: this.pageNumber,
-      pageSize: this.pageNumber
-    } as Page;
-
-    this.nextBtnClicked.emit(nextPage);
+    this.nextBtnClicked.emit(this.pageNumber);
   }
 
 }

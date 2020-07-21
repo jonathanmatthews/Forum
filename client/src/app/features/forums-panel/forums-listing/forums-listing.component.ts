@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, combineLatest, of } from 'rxjs';
 import { ForumDto, CategoryClient, ForumClient } from 'src/app/generated/forum-api.service';
 import { FiltersService } from 'src/app/services/filters.service';
 import { takeUntil } from 'rxjs/operators';
-import { Page } from 'src/app/shared/page';
-import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-forums-listing',
@@ -21,10 +19,11 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     private _router: Router) { }
 
   public forums$: Observable<ForumDto[]>;
-  public pageNumber = 1;
-  public pageSize = 10;
+  public pageNumber = 0;
+  public pageSize = 5;
   public forumsCount$: Observable<number>;
 
+  private _pageNumberSubject = new BehaviorSubject<number>(0);
   private _destroy$ = new Subject();
 
   public ngOnInit(): void {
@@ -40,37 +39,41 @@ export class ForumsListingComponent implements OnInit, OnDestroy {
     this._router.navigate(['/forums', forum.id]);
   }
 
-  public getPrevPage(prevPage: Page): void {
-    this.pageNumber = prevPage.pageNumber;
-    this.pageSize = prevPage.pageSize;
+  public getPrevPage(prevPage: number): void {
+    this.pageNumber = prevPage;
+    this._pageNumberSubject.next(prevPage);
   }
 
-  public getNextPage(nextPage: Page): void {
-    this.pageNumber = nextPage.pageNumber;
-    this.pageSize = nextPage.pageSize;
+  public getNextPage(nextPage: number): void {
+    this.pageNumber = nextPage;
+    this._pageNumberSubject.next(nextPage);
   }
 
   private loadForums(): void {
-    this._filtersService.selectedCategory$
-    .pipe(takeUntil(this._destroy$))
-    .subscribe(category => {
-      if (category.title === 'All') {
-        this.forums$ = this._forumService.all(this.pageSize, this.pageNumber);
-        return;
-      }
+    combineLatest(
+      [this._filtersService.selectedCategory$,
+      this._pageNumberSubject.asObservable()])
+        .pipe(takeUntil(this._destroy$))
+        .subscribe(([category, pageNumber]) => {
+          if (category.title === 'All') {
+            this.forums$ = this._forumService.all(this.pageSize, pageNumber);
+            return;
+          }
 
-      this.forums$ = this._categoryService.listForums(category.id, this.pageSize, this.pageNumber);
-    });
+          this.forums$ = this._categoryService.listForums(category.id, this.pageSize, pageNumber);
+        });
 
-    this._filtersService.searchTerm$
+    combineLatest(
+      [this._filtersService.searchTerm$,
+      this._pageNumberSubject.asObservable()])
       .pipe(
         takeUntil(this._destroy$))
-      .subscribe(searchTerm => {
+      .subscribe(([searchTerm, pageNumber]) => {
         if (!searchTerm) {
           return;
         }
 
-        this.forums$ = this._forumService.search(searchTerm, this.pageSize, this.pageNumber);
+        this.forums$ = this._forumService.search(searchTerm, this.pageSize, pageNumber);
       });
     }
 }
