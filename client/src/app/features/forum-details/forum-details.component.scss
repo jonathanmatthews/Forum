@@ -7,33 +7,33 @@
     margin-bottom: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
-  
+
     .forum-header {
-      padding-top: 4*$spacer;
+      padding-top: 2*$spacer;
       border-bottom: $border-line;
-  
+
       .title {
         padding-bottom: $spacer;
-  
+
         .btn {
           float: right;
         }
       }
     }
-  
+
     .forum-text, .forum-details {
       margin: 2*$spacer;
     }
-  
+
     .forum-text {
       margin-bottom: 3*$spacer;
     }
-  
+
     .forum-details {
       text-align: right;
     }
   }
-  
+
 }
 
 @media (min-width: 901px) {
