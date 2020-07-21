@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+
+.paging {
+  display: flex;
+  flex-direction: row;
+
+  .count-display {
+    margin: 0;
+    margin-right: 2*$spacer;
+    line-height: 2.5;
+  }
+
+  .page-descr {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    margin-right: 1px;
+    line-height: 1.25;
+    border: 1px solid #dee2e6;
+    font-weight: 500;
+  }
+}

@@ -20,6 +20,7 @@ import { CommentsListingComponent } from './features/forum-details/comments/comm
 import { AuthClient, CategoryClient, ForumClient } from './generated/forum-api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CreateCategoryComponent } from './features/create-category/create-category.component';
+import { PagerComponent } from './shared/pager/pager.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreateCategoryComponent } from './features/create-category/create-categ
     CreateForumComponent,
     AddCommentComponent,
     CommentsListingComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    PagerComponent
   ],
   imports: [
     BrowserModule,

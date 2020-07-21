@@ -9,6 +9,17 @@
         <p class="sub-text">Created at {{forum.creationDate | date:'medium'}}</p>
       </div>
     </div>
+
+    <div class="pager">
+      <app-pager
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [count$]="forumsCount$"
+        [showCountInfo]="true"
+        (prevBtnClicked)="getPrevPage($event)"
+        (nextBtnClicked)="getNextPage($event)">
+      </app-pager>
+    </div>
   </ng-container>
 </div>
 

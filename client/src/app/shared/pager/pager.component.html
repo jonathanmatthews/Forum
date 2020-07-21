@@ -1,0 +1,20 @@
+<nav class="paging" *ngIf="count > 0">
+  <p *ngIf="showCountInfo" class="count-display light-font-colour">Showing {{getDisplayedCount()}} of {{count}}</p>
+  <ul class="pagination">
+    <li class="page-item"
+      [ngClass]="{'disabled': pageNumber === 0}">
+      <a class="page-link"
+        [ngClass]="{'clickable link': pageNumber > 0}"
+        (click)="goToPrevPage()">Previous</a>
+    </li>
+    <li class="page-item">
+      <a class="page-descr normal-font-colour">Page {{pageNumber + 1}} of {{totalPages}}</a>
+    </li>
+    <li class="page-item"
+      [ngClass]="{'disabled': pageNumber + 1 === totalPages}">
+      <a class="page-link"
+        [ngClass]="{'clickable link': pageNumber + 1 < totalPages}"
+        (click)="goToNextPage()">Next</a>
+    </li>
+  </ul>
+</nav>
