@@ -56,6 +56,11 @@ namespace Server.Controllers
             }
             else
             {
+                var identity = new ClaimsIdentity("cookies");
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.Username));
+                await HttpContext.SignInAsync("cookies", new ClaimsPrincipal(identity), new AuthenticationProperties { IsPersistent = true });
+
                 return _mapper.Map<UserDto>(user);
             }
         }
