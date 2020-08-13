@@ -1,0 +1,44 @@
+version: "3"
+services:
+    forum-client:
+        container_name: forum-client
+        build: .\client
+        ports:
+            - "4200:4200"
+        volumes:
+            - .:/forum
+        restart: unless-stopped
+    forum-sqlserver:
+        container_name: forum-sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment:
+            - SA_PASSWORD=${SQLSERVERS_DEFAULT_PASSWORD:-Password1}
+            - ACCEPT_EULA=Y
+        ports:
+            - "11433:1433"
+        networks:
+            - forum
+        restart: unless-stopped
+    forum-server:
+        container_name: forum-server
+        build: .\server
+        ports:
+            - "5000:5000"
+            - "5001:5001"
+        networks:
+            - forum
+        environment:
+            - ASPNETCORE_URLS="https://+;http://+"
+            - ASPNETCORE_HTTPS_PORT=5001
+            - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD:-password}
+            - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/aspnetapp.pfx
+            - connectionString=Server=forum-sqlserver;Database=Forum;User Id=sa;Password=${SQLSERVER_DEFAULT_PASSWORD:-Password1};
+        volumes:
+            - .:/forum
+            - ~\.aspnet\https:/certs
+        restart: unless-stopped
+        depends_on:
+            - forum-sqlserver
+networks:
+    forum:
+        driver: bridge
