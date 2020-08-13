@@ -1,7 +1,8 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Server.Models;
+using Datamodel.Infrastructure;
+using Datamodel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

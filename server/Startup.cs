@@ -15,7 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Server.Infrastructure;
-using Server.Models;
+using Datamodel.Infrastructure;
+using Datamodel.Models;
 
 namespace Server
 {
@@ -24,7 +25,6 @@ namespace Server
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            AppDbContext.Connection = Configuration["connectionString"];
         }
 
         public IConfiguration Configuration { get; }

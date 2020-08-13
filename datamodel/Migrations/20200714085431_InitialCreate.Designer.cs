@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Server.Infrastructure;
+using Datamodel.Infrastructure;
 
-namespace server.Migrations
+namespace Datamodel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20200714085431_InitialCreate")]
@@ -20,7 +20,7 @@ namespace server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Server.Models.User", b =>
+            modelBuilder.Entity("Datamodel.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");

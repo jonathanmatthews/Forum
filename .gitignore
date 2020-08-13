@@ -49,3 +49,8 @@ Thumbs.db
 server/bin
 server/obj
 server/.vs
+
+# Datamodel
+datamodel/bin
+datamodel/obj
+datamodel/.vs

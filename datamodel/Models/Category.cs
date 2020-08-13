@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Server.Models
+namespace Datamodel.Models
 {
     public class Category
     {

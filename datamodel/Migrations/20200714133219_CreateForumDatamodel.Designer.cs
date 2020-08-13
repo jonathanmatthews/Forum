@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Server.Infrastructure;
+using Datamodel.Infrastructure;
 
-namespace server.Migrations
+namespace Datamodel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200714133219_CreateForumDatamodel")]
+    partial class CreateForumDatamodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Server.Models.Category", b =>
+            modelBuilder.Entity("Datamodel.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +41,7 @@ namespace server.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Server.Models.ChildComment", b =>
+            modelBuilder.Entity("Datamodel.Models.ChildComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +70,7 @@ namespace server.Migrations
                     b.ToTable("ChildComments");
                 });
 
-            modelBuilder.Entity("Server.Models.Comment", b =>
+            modelBuilder.Entity("Datamodel.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +99,7 @@ namespace server.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Server.Models.Forum", b =>
+            modelBuilder.Entity("Datamodel.Models.Forum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -130,7 +132,7 @@ namespace server.Migrations
                     b.ToTable("Forums");
                 });
 
-            modelBuilder.Entity("Server.Models.User", b =>
+            modelBuilder.Entity("Datamodel.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -149,35 +151,35 @@ namespace server.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Server.Models.ChildComment", b =>
+            modelBuilder.Entity("Datamodel.Models.ChildComment", b =>
                 {
-                    b.HasOne("Server.Models.User", "Author")
+                    b.HasOne("Datamodel.Models.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Server.Models.Comment", "Comment")
+                    b.HasOne("Datamodel.Models.Comment", "Comment")
                         .WithMany("ChildComments")
                         .HasForeignKey("CommentId");
                 });
 
-            modelBuilder.Entity("Server.Models.Comment", b =>
+            modelBuilder.Entity("Datamodel.Models.Comment", b =>
                 {
-                    b.HasOne("Server.Models.User", "Author")
+                    b.HasOne("Datamodel.Models.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Server.Models.Forum", "Forum")
+                    b.HasOne("Datamodel.Models.Forum", "Forum")
                         .WithMany("Comments")
                         .HasForeignKey("ForumId");
                 });
 
-            modelBuilder.Entity("Server.Models.Forum", b =>
+            modelBuilder.Entity("Datamodel.Models.Forum", b =>
                 {
-                    b.HasOne("Server.Models.User", "Author")
+                    b.HasOne("Datamodel.Models.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Server.Models.Category", "Category")
+                    b.HasOne("Datamodel.Models.Category", "Category")
                         .WithMany("Forums")
                         .HasForeignKey("CategoryId");
                 });

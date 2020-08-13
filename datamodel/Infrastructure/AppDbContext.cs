@@ -1,15 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using Server.Models;
+using Datamodel.Models;
+using Microsoft.Extensions.Configuration;
 
-namespace Server.Infrastructure
+namespace Datamodel.Infrastructure
 {
     public class AppDbContext : DbContext
     {
-        public static string Connection;
-
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(Connection);
+            var configuration = new ConfigurationBuilder()
+                .AddUserSecrets<AppDbContext>()
+                .AddEnvironmentVariables()
+                .Build();
+
+            builder.UseSqlServer(configuration["connectionString"]);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

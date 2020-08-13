@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Dtos;
-using Server.Infrastructure;
-using Server.Models;
+using Datamodel.Infrastructure;
+using Datamodel.Models;
 
 namespace server.Controllers
 {

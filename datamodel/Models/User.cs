@@ -1,4 +1,4 @@
-namespace Server.Models
+namespace Datamodel.Models
 {
     public class User
     {
