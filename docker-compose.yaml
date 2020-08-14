@@ -1,13 +1,5 @@
 version: "3"
 services:
-    forum-client:
-        container_name: forum-client
-        build: .\client
-        ports:
-            - "4200:4200"
-        volumes:
-            - .:/forum
-        restart: unless-stopped
     forum-sqlserver:
         container_name: forum-sqlserver
         image: mcr.microsoft.com/mssql/server:2019-latest
@@ -39,6 +31,14 @@ services:
         restart: unless-stopped
         depends_on:
             - forum-sqlserver
+    forum-client:
+        container_name: forum-client
+        build: .\client
+        ports:
+            - "4200:4200"
+        volumes:
+            - .:/forum
+        restart: unless-stopped
 networks:
     forum:
         driver: bridge

@@ -1,6 +1,6 @@
 FROM node
-RUN npm i -g @angular/cli
 WORKDIR /forum/client
+RUN npm i -g @angular/cli
 
 EXPOSE 4000
 
