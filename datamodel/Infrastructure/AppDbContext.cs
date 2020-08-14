@@ -1,3 +1,5 @@
+using System.Data.SqlClient;
+using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using Datamodel.Models;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +8,24 @@ namespace Datamodel.Infrastructure
 {
     public class AppDbContext : DbContext
     {
+        public void MigrateWithRetry()
+        {
+            // Retry if database container is not up yet.
+            for (int i = 0; i < 20; ++i)
+            {
+                try
+                {
+                    Thread.Sleep(2000);
+                    Database.Migrate();
+                    }
+                catch (SqlException)
+                {
+                    continue;
+                }
+                break;
+            }
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             var configuration = new ConfigurationBuilder()
@@ -21,21 +41,21 @@ namespace Datamodel.Infrastructure
             builder.Entity<Category>()
                 .HasMany(o => o.Forums)
                 .WithOne(o => o.Category);
-            
+
             builder.Entity<Forum>()
                 .HasMany(o => o.Comments)
                 .WithOne(o => o.Forum);
-            
+
             builder.Entity<Forum>()
                 .HasOne(o => o.Author);
-            
+
             builder.Entity<Comment>()
                 .HasMany(o => o.ChildComments)
                 .WithOne(o => o.Comment);
-            
+
             builder.Entity<Comment>()
                 .HasOne(o => o.Author);
-            
+
             builder.Entity<ChildComment>()
                 .HasOne(o => o.Author);
         }

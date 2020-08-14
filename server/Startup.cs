@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -70,6 +72,10 @@ namespace Server
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                _migrateDatabase(app);
+            }
 
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -81,6 +87,19 @@ namespace Server
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void _migrateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<AppDbContext>())
+                {
+                    context.MigrateWithRetry();
+                }
+            }
         }
     }
 }
