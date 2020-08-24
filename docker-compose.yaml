@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 services:
     forum-sqlserver:
         container_name: forum-sqlserver
@@ -13,7 +13,7 @@ services:
         restart: unless-stopped
     forum-server:
         container_name: forum-server
-        build: .\server
+        build: ./server
         ports:
             - "5000:5000"
             - "5001:5001"
@@ -25,19 +25,26 @@ services:
             - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD:-password}
             - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/aspnetapp.pfx
             - connectionString=Server=forum-sqlserver;Database=Forum;User Id=sa;Password=${SQLSERVER_DEFAULT_PASSWORD:-Password1};
+            - DOTNET_USE_POLLING_FILE_WATCHER=false
         volumes:
-            - .:/forum
-            - ~\.aspnet\https:/certs
+            - type: bind
+              source: .
+              target: /forum
+            - type: bind
+              source: /mnt/c/Users/Jonathan.Matthews/.aspnet/https
+              target: /certs
         restart: unless-stopped
         depends_on:
             - forum-sqlserver
     forum-client:
         container_name: forum-client
-        build: .\client
+        build: ./client
         ports:
             - "4200:4200"
         volumes:
-            - .:/forum
+            - type: bind
+              source: .
+              target: /forum
         restart: unless-stopped
 networks:
     forum:
