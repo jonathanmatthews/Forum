@@ -1,3 +1,5 @@
+using System.Data.SqlClient;
+using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using Datamodel.Models;
 using Microsoft.Extensions.Configuration;
@@ -21,21 +23,21 @@ namespace Datamodel.Infrastructure
             builder.Entity<Category>()
                 .HasMany(o => o.Forums)
                 .WithOne(o => o.Category);
-            
+
             builder.Entity<Forum>()
                 .HasMany(o => o.Comments)
                 .WithOne(o => o.Forum);
-            
+
             builder.Entity<Forum>()
                 .HasOne(o => o.Author);
-            
+
             builder.Entity<Comment>()
                 .HasMany(o => o.ChildComments)
                 .WithOne(o => o.Comment);
-            
+
             builder.Entity<Comment>()
                 .HasOne(o => o.Author);
-            
+
             builder.Entity<ChildComment>()
                 .HasOne(o => o.Author);
         }

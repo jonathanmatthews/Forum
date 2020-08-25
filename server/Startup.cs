@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -35,7 +37,7 @@ namespace Server
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                    .WithOrigins("http://localhost:4200")
+                    .WithOrigins("http://localhost:4200", "http://localhost:81")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
