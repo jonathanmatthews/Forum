@@ -37,7 +37,7 @@ namespace Server
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                    .WithOrigins("http://localhost:4200")
+                    .WithOrigins("http://localhost:4200", "http://localhost:81")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
@@ -72,10 +72,6 @@ namespace Server
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                _migrateDatabase(app);
-            }
 
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -87,19 +83,6 @@ namespace Server
             {
                 endpoints.MapControllers();
             });
-        }
-
-        private static void _migrateDatabase(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<AppDbContext>())
-                {
-                    context.MigrateWithRetry();
-                }
-            }
         }
     }
 }

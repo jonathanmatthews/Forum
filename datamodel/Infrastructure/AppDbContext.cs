@@ -8,24 +8,6 @@ namespace Datamodel.Infrastructure
 {
     public class AppDbContext : DbContext
     {
-        public void MigrateWithRetry()
-        {
-            // Retry if database container is not up yet.
-            for (int i = 0; i < 20; ++i)
-            {
-                try
-                {
-                    Thread.Sleep(2000);
-                    Database.Migrate();
-                    }
-                catch (SqlException)
-                {
-                    continue;
-                }
-                break;
-            }
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             var configuration = new ConfigurationBuilder()
