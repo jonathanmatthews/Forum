@@ -19,17 +19,17 @@ services:
             dockerfile: server/prod.Dockerfile
         ports:
             - "5000:80"
-            - "5001:443"
+            # - "5001:5001"
         networks:
             - forum
         environment:
-            - ASPNETCORE_URLS="https://+;http://+"
-            - ASPNETCORE_HTTPS_PORT=5001
-            - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD:-password}
-            - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/aspnetapp.pfx
+            # - ASPNETCORE_URLS=http://+
+            # - ASPNETCORE_HTTPS_PORT=5001
+            # - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD:-password}
+            # - ASPNETCORE_Kestrel__Certificates__Default__Path=/certs/aspnetapp.pfx
             - connectionString=Server=forum-sqlserver;Database=Forum;User Id=sa;Password=${SQLSERVER_DEFAULT_PASSWORD:-Password1};
-        volumes:
-            - ~\.aspnet\https:/certs
+        # volumes:
+            # - /mnt/c/Users/jonathan.matthews/.aspnet/https:/certs
         restart: unless-stopped
         depends_on:
             - forum-sqlserver
@@ -39,8 +39,7 @@ services:
             context: .
             dockerfile: client/prod.Dockerfile
         ports:
-            - "80:80"
-            - "443:443"
+            - "81:80"
         restart: unless-stopped
 networks:
     forum:

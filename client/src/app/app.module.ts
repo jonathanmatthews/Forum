@@ -17,10 +17,11 @@ import { CommentsComponent } from './features/forum-details/comments/comments.co
 import { CreateForumComponent } from './features/create-forum/create-forum.component';
 import { AddCommentComponent } from './features/forum-details/comments/add-comment/add-comment.component';
 import { CommentsListingComponent } from './features/forum-details/comments/comments-listing/comments-listing.component';
-import { AuthClient, CategoryClient, ForumClient } from './generated/forum-api.service';
+import { AuthClient, CategoryClient, ForumClient, API_BASE_URL } from './generated/forum-api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CreateCategoryComponent } from './features/create-category/create-category.component';
 import { PagerComponent } from './shared/pager/pager.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PagerComponent } from './shared/pager/pager.component';
     HttpClient,
     AuthClient,
     CategoryClient,
-    ForumClient
+    ForumClient,
+    { provide: API_BASE_URL, useValue: environment.apiRoot }
   ],
   bootstrap: [AppComponent]
 })
